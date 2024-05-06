@@ -477,6 +477,7 @@ select {
 .page-catalog{
     .background-color{
         .container{
+            padding-top: 35px;
             .book-area{
                 display: flex;
                 flex-wrap: wrap;
@@ -484,7 +485,7 @@ select {
                 justify-content: space-between;
                 row-gap: 12px;
                 .card{
-                    width: 32%;
+                    width: 24%;
                     position: relative;
                     row-gap: 1%;
                     padding: 15px;
@@ -681,6 +682,107 @@ select {
                                                 }
                                             }
                                         }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.page-buku-saya{
+    .background-color{
+        .container{
+            padding-top: 35px;
+            .buku-saya-area{
+                .menu-link{
+                    padding: 15px 0;
+                    width: 100%;
+                    border-radius: 10px;
+                    text-align: center;
+                    display: inline-block;
+                    color: #000;
+                }
+                .active-link{
+                    background-color: #D7A760;
+                }
+            }
+            .book-area{
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                justify-content: space-between;
+                row-gap: 12px;
+                .card{
+                    width: 24%;
+                    position: relative;
+                    row-gap: 1%;
+                    padding: 15px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: column;
+                    align-content: center;
+                    .flex-container{
+                        display: flex;
+                        flex-wrap: wrap;
+                        flex-direction: column;
+                        align-content: center;
+                        height: 100%;
+                        place-content: space-between;
+                        width: 100%;
+                        .left-item{
+                            text-align: center;
+                            width: 100%;
+                            img{
+                                height: 141px;
+                                margin-bottom: 8px;
+                            }
+                        }
+                        .right-item{
+                            width: 100%;
+                            .book-title{
+                                font-size: 13px;
+                                max-height: 32px;
+                                overflow-y: hidden;
+                                text-align: center;
+                                margin-bottom: 12px;
+                            }
+                            .writer-name-badge{
+                                color: #9A671A;
+                                font-size: 13px;
+                                text-align: center;
+                            }
+                            .flex-area{
+                                display: flex;
+                                flex-wrap: wrap;
+                                flex-direction: row;
+                                column-gap: 4%;
+                                padding-top: 12px;
+                                .left-area{
+                                    width: 48%;
+                                    .book-stock{
+                                        padding: 5px 8px;
+                                        text-align: center;
+                                        border: 1px solid #2FBE46;
+                                        border-radius: 100px;
+                                        color: #2FBE46;
+                                    }
+                                }
+                                .right-area{
+                                    width: 48%;
+                                    .borrow-button{
+                                        width: 100%;
+                                        text-align: center;
+                                        padding: 5px 16px;
+                                        border-radius: 100px;
+                                        background-color: #2FBE46;
+                                        color: #fff;
+                                        display: inline-block;
+                                        min-width: unset;
+                                        border: none;
                                     }
                                 }
                             }

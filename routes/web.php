@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminBookController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BukuSayaController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('home.about');
 Route::resource('/katalog', CatalogController::class, ['names' => 'catalog']);
+Route::resource('/buku-saya', BukuSayaController::class, ['names' => 'buku-saya']);
 
 Auth::routes(['verify' => true]);
 

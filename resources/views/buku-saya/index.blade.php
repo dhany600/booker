@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <div class="page-catalog">
+    <div class="page-buku-saya">
         <div class="background-color">
             <div class="container">
                 <div class="row mb-4">
@@ -30,31 +30,17 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <h3 class="text-title">
-                            Kategori
-                        </h3>
-                        <div class="category-area">
-                            <div class="card active-card">
-                                <a href="#">
-                                    <img class="category-image" src="{{ asset('src/img/Screen_Shot_2024-04-30_at_00.39 1.png') }}" alt="">
-                                    <p class="category-text">
-                                        Rekomendasi
-                                    </p>
-                                </a>
-                            </div>
-                            <div class="card">
-                                <a href="#">
-                                    <img class="category-image" src="{{ asset('src/img/Screen_Shot_2024-04-30_at_00.39 1.png') }}" alt="">
-                                    <p class="category-text">
-                                        Rekomendasi
-                                    </p>
-                                </a>
-                            </div>
+                        <div class="buku-saya-area">
+                            <a href="#" class="menu-link active-link">
+                                <p class="category-text">
+                                    Buku Saya
+                                </p>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-10">
                         <h3 class="text-title">
-                            Rekomendasi
+                            Buku Saya
                         </h3>
                         <div class="book-area">
                             @foreach ($books as $book)

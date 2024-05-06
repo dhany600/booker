@@ -61,8 +61,8 @@
                                         Katalog
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                <li class="nav-item {{ Request::is('buku-saya') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('buku-saya.index') }}">
                                         Buku Saya
                                     </a>
                                 </li>
