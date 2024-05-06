@@ -31,6 +31,54 @@ button,
   padding: 16px 24px;
   border-radius: 10px;
 }
+.background-color {
+  background-color: #F4D9AF;
+  min-height: 68svh;
+}
+.search-input {
+  padding: 16px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+select {
+  padding: 16px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+}
+.text-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.category-area {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  row-gap: 16px;
+}
+.category-area .card {
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.category-area .card a {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  row-gap: 16px;
+  align-items: center;
+}
+.category-area .card a img {
+  width: fit-content;
+}
+.category-area .card a .category-text {
+  font-size: 15px;
+  color: #000;
+}
+.category-area .active-card {
+  background-color: #ECC58B;
+}
 .login-page .background-area {
   background-color: #F4D9AF;
   display: flex;
@@ -279,10 +327,14 @@ button,
   row-gap: 15px;
 }
 .page-home .background-color .container .book-area .card {
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 0;
 }
 .page-home .background-color .container .book-area .card .flex-container {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  padding: 16px 24px;
   display: flex;
+  border-radius: 10px;
   flex-direction: row;
   flex-wrap: wrap;
   column-gap: 4%;
@@ -295,6 +347,10 @@ button,
 }
 .page-home .background-color .container .book-area .card .flex-container .right-item {
   width: 83%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .page-home .background-color .container .book-area .card .flex-container .right-item .book-title {
   font-size: 16px;
@@ -346,6 +402,245 @@ button,
 .page-home .background-color .container .book-area .card .flex-container .right-item .flex-area .right-area .borrow-button {
   padding: 8px 40px;
   color: #fff;
+  border-radius: 100px;
+  background-color: #2FBE46;
+}
+.page-about-us .background-color {
+  padding-top: 60px;
+  background-color: #F4D9AF;
+  position: relative;
+  min-height: 90svh;
+}
+.page-about-us .background-color .container {
+  overflow-x: auto;
+}
+.page-about-us .background-color .container .flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.page-about-us .background-color .container .flex-container .left-item {
+  width: 50%;
+}
+.page-about-us .background-color .container .flex-container .left-item img {
+  position: absolute;
+  left: -5%;
+  top: 50%;
+  width: 50%;
+  transform: translateY(-50%);
+}
+.page-about-us .background-color .container .flex-container .right-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50%;
+  transform: translateY(-50%);
+}
+.page-about-us .background-color .container .flex-container .right-item .title-text {
+  font-family: "Italiana", sans-serif;
+  font-size: 52px;
+  margin-bottom: 80px;
+}
+.page-about-us .background-color .container .flex-container .right-item .about-text {
+  font-family: "Italiana", sans-serif;
+  font-size: 20px;
+}
+.page-catalog .background-color .container .book-area {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  row-gap: 12px;
+}
+.page-catalog .background-color .container .book-area .card {
+  width: 32%;
+  position: relative;
+  row-gap: 1%;
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+}
+.page-catalog .background-color .container .book-area .card .flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+  height: 100%;
+  place-content: space-between;
+  width: 100%;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .left-item {
+  text-align: center;
+  width: 100%;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .left-item img {
+  height: 141px;
+  margin-bottom: 8px;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item {
+  width: 100%;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .book-title {
+  font-size: 13px;
+  max-height: 32px;
+  overflow-y: hidden;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .writer-name-badge {
+  color: #9A671A;
+  font-size: 13px;
+  text-align: center;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .flex-area {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  column-gap: 4%;
+  padding-top: 12px;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .flex-area .left-area {
+  width: 48%;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .flex-area .left-area .book-stock {
+  padding: 5px 8px;
+  text-align: center;
+  border: 1px solid #2FBE46;
+  border-radius: 100px;
+  color: #2FBE46;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .flex-area .right-area {
+  width: 48%;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .flex-area .right-area .borrow-button {
+  width: 100%;
+  text-align: center;
+  padding: 5px 16px;
+  border-radius: 100px;
+  background-color: #2FBE46;
+  color: #fff;
+  display: inline-block;
+  min-width: unset;
+  border: none;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog {
+  padding: 30px;
+  max-width: 850px;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content {
+  background-color: #F9EFDF;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-header {
+  align-self: flex-end;
+  padding: 0;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-header button {
+  padding: 22px 22px 0 0;
+  margin: 0;
+  min-width: unset;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  column-gap: 3%;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .left-area {
+  width: 33%;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .left-area .book-image {
+  width: 100%;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area {
+  width: 64%;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .book-title {
+  font-size: 16px;
+  font-weight: 700;
+  max-height: unset;
+  margin-bottom: 34px;
+  text-align: left;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .book-synopsis {
+  margin-bottom: 21px;
+  font-size: 15px;
+  font-weight: 400;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area .left-area {
+  width: 50%;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area .left-area .writer-text-title {
+  display: inline-block;
+  font-size: 15px;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area .left-area .writer-name {
+  display: inline-block;
+  font-size: 15px;
+  padding-left: 10px;
+  color: #9A671A;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area .right-area .limit-text-title {
+  display: inline-block;
+  font-size: 15px;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area .right-area .limit-name {
+  display: inline-block;
+  font-size: 15px;
+  padding-left: 10px;
+  color: #9A671A;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-footer .borrow-button {
+  text-align: center;
+  padding: 5px 16px;
+  border-radius: 100px;
+  background-color: #2FBE46;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content {
+  position: relative;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content .modal-body {
+  position: static;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex {
+  place-content: center;
+  text-align: center;
+  row-gap: 20px;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex svg {
+  position: absolute;
+  top: 0;
+  transform: translateY(-50%) translateX(-50%);
+  left: 50%;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .reminder-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .reminder-text {
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .cancel-button {
+  text-align: center;
+  padding: 5px 16px;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  background-color: #EE0000;
+}
+.page-catalog .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .confirm-button {
+  text-align: center;
+  padding: 5px 16px;
+  color: #fff;
+  border: none;
   border-radius: 100px;
   background-color: #2FBE46;
 }

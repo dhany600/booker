@@ -29,4 +29,12 @@ class HomeController extends Controller
             'books' => $books,
         ]);
     }
+
+    public function about()
+    {
+        $books = Book::all();
+        return view('tentang-kami.index', [
+            'books' => $books,
+        ]);
+    }
 }

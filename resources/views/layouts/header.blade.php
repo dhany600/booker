@@ -25,13 +25,14 @@
                                 Logout
                             </a> --}}
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-    <!-- Add CSRF token for security -->
-</form>
+                                @csrf
+                                <!-- Add CSRF token for security -->
+                            </form>
 
-<a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-    Logout
-</a>
+                            <a href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -45,18 +46,18 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#">
+                                <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
+                                    <a class="nav-link" href="/home">
                                         Beranda
-                                    <span class="sr-only">(current)</span></a>
+                                </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                <li class="nav-item {{ Request::is('tentang-kami') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('home.about') }}">
                                         Tentang Kami
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                <li class="nav-item {{ Request::is('katalog') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('catalog.index') }}">
                                         Katalog
                                     </a>
                                 </li>

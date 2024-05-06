@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminBookController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,8 @@ Route::resource('/admin-dashboard/book', AdminBookController::class, ['names' =>
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/tentang-kami', [HomeController::class, 'about'])->name('home.about');
+Route::resource('/katalog', CatalogController::class, ['names' => 'catalog']);
 
 Auth::routes(['verify' => true]);
 
