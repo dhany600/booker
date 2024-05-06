@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/example-book', function () {
+    return view('example-book.index');
+});
 
 // Route::get('/login', [AuthController::class, 'index'])->name('auth.login');
 // Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
