@@ -31,9 +31,19 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="buku-saya-area">
-                            <a href="#" class="menu-link active-link">
+                            <a href="{{ route('bukuSaya.index') }}" class="menu-link {{ Request::is('buku-saya') ? 'active-link' : '' }}">
                                 <p class="category-text">
                                     Buku Saya
+                                </p>
+                            </a>
+                            <a href="{{ route('bukuFavorit') }}" class="menu-link {{ Request::is('buku-favorit') ? 'active-link' : 'awikwok' }}">
+                                <p class="category-text">
+                                    Buku Favorit
+                                </p>
+                            </a>
+                            <a href="{{ route('riwayatPinjam') }}" class="menu-link {{ Request::is('riwayat-pinjam') ? 'active-link' : 'awikwok' }}">
+                                <p class="category-text">
+                                    Riwayat Pinjaman
                                 </p>
                             </a>
                         </div>
@@ -47,128 +57,51 @@
                             <div class="card">
                                 <div class="flex-container">
                                     <div class="left-item">
-                                        <img src="{{ asset('storage/' . $book->gambar_buku) }}" alt=""
+                                        <img src="{{ asset('storage/' . $book->book->gambar_buku) }}" alt=""
                                             class="book-image">
                                     </div>
                                     <div class="right-item">
-                                        <h3 class="book-title">
-                                            {{ \Illuminate\Support\Str::limit($book->nama_buku, 57, '...') }}
-                                        </h3>
+                                        <a href="{{ route('bukuSaya.bacaBuku', ['book_id' => $book->book->id]) }}"
+                                            class="book-title" style="color: #000">
+                                            {{ \Illuminate\Support\Str::limit($book->book->nama_buku, 57, '...') }}
+                                        </a>
+
                                         <p class="writer-name-badge">
-                                            {{ $book->pengarang }}
+                                            {{ $book->book->pengarang }}
                                         </p>
                                         <div class="flex-area">
-                                            <div class="left-area">
-                                                <div class="book-stock">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                                        viewBox="0 0 13 13" fill="none">
-                                                        <path
-                                                            d="M12.0732 10.8994L10.1285 1.65331C10.1034 1.5324 10.0546 1.41765 9.98494 1.31565C9.9153 1.21365 9.8262 1.12641 9.72275 1.05895C9.6193 0.991494 9.50354 0.945139 9.38212 0.922551C9.26071 0.899964 9.13602 0.901589 9.01523 0.927334L6.27246 1.51679C6.02985 1.56991 5.81803 1.71667 5.68307 1.92515C5.5481 2.13363 5.50091 2.38697 5.55176 2.63007L7.49648 11.8762C7.53982 12.0871 7.65447 12.2767 7.82114 12.4131C7.98782 12.5495 8.19636 12.6243 8.41172 12.625C8.47829 12.6249 8.54467 12.6178 8.60977 12.6039L11.3525 12.0144C11.5954 11.9612 11.8075 11.8141 11.9425 11.6053C12.0774 11.3965 12.1244 11.1427 12.0732 10.8994ZM6.46875 2.43847C6.46875 2.43495 6.46875 2.43319 6.46875 2.43319L9.21094 1.84726L9.40606 2.77714L6.66387 3.36718L6.46875 2.43847ZM7.05469 5.21464L6.8584 4.283L9.60176 3.69354L9.79746 4.62519L7.05469 5.21464ZM11.1562 11.098L8.41406 11.684L8.21895 10.7541L10.9611 10.1641L11.1562 11.0928C11.1562 11.0963 11.1562 11.098 11.1562 11.098ZM4.59375 1.37499H1.78125C1.53261 1.37499 1.29415 1.47376 1.11834 1.64958C0.942522 1.82539 0.84375 2.06385 0.84375 2.31249V11.6875C0.84375 11.9361 0.942522 12.1746 1.11834 12.3504C1.29415 12.5262 1.53261 12.625 1.78125 12.625H4.59375C4.84239 12.625 5.08085 12.5262 5.25666 12.3504C5.43248 12.1746 5.53125 11.9361 5.53125 11.6875V2.31249C5.53125 2.06385 5.43248 1.82539 5.25666 1.64958C5.08085 1.47376 4.84239 1.37499 4.59375 1.37499ZM1.78125 2.31249H4.59375V3.24999H1.78125V2.31249ZM4.59375 11.6875H1.78125V10.75H4.59375V11.6875Z"
-                                                            fill="#2FBE46" />
-                                                    </svg>
-                                                    {{ $book->book_left - $book->book_quantity }} / {{ $book->book_quantity }}
+                                            <div class="first-area">
+                                                <div class="badge">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-eye">
+                                                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                                        <circle cx="12" cy="12" r="3" /></svg>
+                                                        <p>
+                                                            {{ $book->reading_status }}
+                                                        </p>
                                                 </div>
+                                            </div>
+                                            <div class="left-area">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16"
+                                                    viewBox="0 0 15 16" fill="none">
+                                                    <path
+                                                        d="M13.5942 8.50743C13.4946 9.66523 13.0664 10.7705 12.36 11.6932C11.6535 12.6159 10.6983 13.3177 9.6066 13.7159C8.5149 14.1142 7.33217 14.1923 6.19755 13.9412C5.06293 13.6901 4.02363 13.1202 3.20192 12.2985C2.38021 11.4768 1.81028 10.4375 1.55917 9.30287C1.30807 8.16825 1.38624 6.98551 1.78449 5.89381C2.18274 4.80211 2.8845 3.84686 3.80721 3.14045C4.72992 2.43404 5.83519 2.00584 6.99299 1.90626C7.05454 1.90118 7.1165 1.90827 7.17531 1.92714C7.23413 1.946 7.28865 1.97627 7.33577 2.0162C7.38289 2.05614 7.42168 2.10497 7.44993 2.15989C7.47818 2.21482 7.49533 2.27478 7.50041 2.33633C7.50549 2.39789 7.49839 2.45985 7.47953 2.51866C7.46066 2.57748 7.4304 2.632 7.39046 2.67912C7.35052 2.72624 7.3017 2.76503 7.24677 2.79328C7.19184 2.82152 7.13189 2.83868 7.07033 2.84376C6.0904 2.92795 5.1549 3.29028 4.37391 3.88811C3.59292 4.48594 2.99892 5.2944 2.66181 6.21836C2.3247 7.14232 2.2585 8.14335 2.471 9.10366C2.68351 10.064 3.16587 10.9436 3.86134 11.6391C4.55681 12.3345 5.43644 12.8169 6.39675 13.0294C7.35706 13.2419 8.35809 13.1757 9.28205 12.8386C10.206 12.5015 11.0145 11.9075 11.6123 11.1265C12.2101 10.3455 12.5725 9.41001 12.6567 8.43008C12.6669 8.30576 12.7261 8.19061 12.8213 8.10995C12.9165 8.0293 13.0398 7.98975 13.1641 8.00001C13.2884 8.01026 13.4036 8.06948 13.4842 8.16464C13.5649 8.2598 13.6044 8.38311 13.5942 8.50743ZM7.03166 4.71876V8.00001C7.03166 8.12433 7.08104 8.24355 7.16895 8.33146C7.25686 8.41937 7.37609 8.46876 7.50041 8.46876H10.7817C10.906 8.46876 11.0252 8.41937 11.1131 8.33146C11.201 8.24355 11.2504 8.12433 11.2504 8.00001C11.2504 7.87569 11.201 7.75646 11.1131 7.66855C11.0252 7.58064 10.906 7.53126 10.7817 7.53126H7.96916V4.71876C7.96916 4.59444 7.91977 4.47521 7.83186 4.3873C7.74396 4.29939 7.62473 4.25001 7.50041 4.25001C7.37609 4.25001 7.25686 4.29939 7.16895 4.3873C7.08104 4.47521 7.03166 4.59444 7.03166 4.71876ZM9.37541 3.31251C9.51447 3.31251 9.65041 3.27127 9.76604 3.19401C9.88167 3.11675 9.97179 3.00693 10.025 2.87846C10.0782 2.74998 10.0922 2.6086 10.065 2.47221C10.0379 2.33581 9.97093 2.21053 9.87259 2.1122C9.77426 2.01386 9.64897 1.9469 9.51258 1.91977C9.37619 1.89264 9.23481 1.90656 9.10633 1.95978C8.97785 2.013 8.86804 2.10312 8.79078 2.21875C8.71352 2.33437 8.67228 2.47032 8.67228 2.60938C8.67228 2.79586 8.74636 2.9747 8.87822 3.10657C9.01008 3.23843 9.18893 3.31251 9.37541 3.31251ZM11.4848 4.71876C11.6238 4.71876 11.7598 4.67752 11.8754 4.60026C11.991 4.523 12.0812 4.41318 12.1344 4.28471C12.1876 4.15623 12.2015 4.01485 12.1744 3.87846C12.1473 3.74207 12.0803 3.61678 11.982 3.51845C11.8836 3.42011 11.7583 3.35315 11.622 3.32602C11.4856 3.29889 11.3442 3.31281 11.2157 3.36603C11.0872 3.41925 10.9774 3.50937 10.9002 3.625C10.8229 3.74062 10.7817 3.87657 10.7817 4.01563C10.7817 4.20211 10.8557 4.38095 10.9876 4.51282C11.1195 4.64468 11.2983 4.71876 11.4848 4.71876ZM12.891 6.82813C13.0301 6.82813 13.166 6.78689 13.2817 6.70963C13.3973 6.63237 13.4874 6.52256 13.5406 6.39408C13.5939 6.2656 13.6078 6.12423 13.5806 5.98783C13.5535 5.85144 13.4866 5.72616 13.3882 5.62782C13.2899 5.52949 13.1646 5.46252 13.0282 5.43539C12.8918 5.40826 12.7504 5.42219 12.622 5.4754C12.4935 5.52862 12.3837 5.61874 12.3064 5.73437C12.2291 5.85 12.1879 5.98594 12.1879 6.12501C12.1879 6.31149 12.262 6.49033 12.3938 6.62219C12.5257 6.75405 12.7046 6.82813 12.891 6.82813Z"
+                                                        fill="#EE0000" />
+                                                </svg>
+                                                @php
+                                                $returnedAt = \Carbon\Carbon::parse($book->returned_at);
+                                                $daysLeft = now()->diffInDays($returnedAt, false);
+                                                @endphp
+
+                                                <!-- Display the number of days left -->
+                                                <p>{{ $daysLeft }} Hari lagi</p>
                                             </div>
                                             <div class="right-area">
-                                                <button type="button" class="borrow-button" data-toggle="modal"
-                                                    data-target="#exampleModal{{ $book->id }}">
-                                                    Pinjam
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="modal modal-borrow-book fade" id="exampleModal{{ $book->id }}" tabindex="-2"
-                                            aria-labelledby="exampleModalLabel{{ $book->id }}" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- Modal body content goes here -->
-                                                        <div class="modal-flex">
-                                                            <div class="left-area">
-                                                                <img src="{{ asset('storage/' . $book->gambar_buku) }}"
-                                                                    alt="" class="book-image">
-                                                            </div>
-                                                            <div class="right-area">
-                                                                <h3 class="book-title">
-                                                                    {{ $book->nama_buku }}
-                                                                </h3>
-                                                                <p class="book-synopsis">
-                                                                    {{ $book->synopsis }}
-                                                                </p>
-                                                                <div class="inner-flex-area">
-                                                                    <div class="left-area">
-                                                                        <p class="writer-text-title">
-                                                                            Penulis : 
-                                                                            <p class="writer-name">
-                                                                                {{ $book->pengarang }}
-                                                                            </p>
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="right-area">
-                                                                        <p class="limit-text-title">
-                                                                            Limit : 
-                                                                            <p class="limit-name">
-                                                                                02 / 05
-                                                                            </p>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="borrow-button btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#borrowModal{{ $book->id }}">
-                                                            Pinjam
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal modal-borrow-book confirmation-modal fade" id="borrowModal{{ $book->id }}" tabindex="-1"
-                                            aria-labelledby="borrowModal{{ $book->id }}" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- Modal body content goes here -->
-                                                        <div class="modal-flex">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="82"
-                                                                height="82" viewBox="0 0 82 82" fill="none">
-                                                                <path
-                                                                    d="M40.625 0C32.5901 0 24.7357 2.38261 18.055 6.84655C11.3742 11.3105 6.16722 17.6552 3.09241 25.0785C0.017602 32.5017 -0.786908 40.6701 0.780616 48.5505C2.34814 56.431 6.2173 63.6697 11.8988 69.3512C17.5803 75.0327 24.819 78.9019 32.6995 80.4694C40.5799 82.0369 48.7483 81.2324 56.1715 78.1576C63.5948 75.0828 69.9395 69.8758 74.4035 63.195C78.8674 56.5143 81.25 48.6599 81.25 40.625C81.2386 29.8541 76.9549 19.5275 69.3387 11.9113C61.7225 4.29515 51.3959 0.0113743 40.625 0ZM37.5 21.875C37.5 21.0462 37.8293 20.2513 38.4153 19.6653C39.0014 19.0792 39.7962 18.75 40.625 18.75C41.4538 18.75 42.2487 19.0792 42.8347 19.6653C43.4208 20.2513 43.75 21.0462 43.75 21.875V43.75C43.75 44.5788 43.4208 45.3737 42.8347 45.9597C42.2487 46.5458 41.4538 46.875 40.625 46.875C39.7962 46.875 39.0014 46.5458 38.4153 45.9597C37.8293 45.3737 37.5 44.5788 37.5 43.75V21.875ZM40.625 62.5C39.6979 62.5 38.7916 62.2251 38.0208 61.71C37.2499 61.1949 36.6491 60.4628 36.2943 59.6063C35.9395 58.7498 35.8467 57.8073 36.0276 56.898C36.2084 55.9887 36.6549 55.1535 37.3104 54.4979C37.966 53.8424 38.8012 53.3959 39.7105 53.2151C40.6198 53.0342 41.5623 53.127 42.4188 53.4818C43.2754 53.8366 44.0075 54.4374 44.5225 55.2083C45.0376 55.9791 45.3125 56.8854 45.3125 57.8125C45.3125 59.0557 44.8186 60.248 43.9396 61.1271C43.0605 62.0061 41.8682 62.5 40.625 62.5Z"
-                                                                    fill="#E6CA32" />
-                                                                <path
-                                                                    d="M37.5 21.875C37.5 21.0462 37.8293 20.2513 38.4153 19.6653C39.0014 19.0792 39.7962 18.75 40.625 18.75C41.4538 18.75 42.2487 19.0792 42.8347 19.6653C43.4208 20.2513 43.75 21.0462 43.75 21.875V43.75C43.75 44.5788 43.4208 45.3737 42.8347 45.9597C42.2487 46.5458 41.4538 46.875 40.625 46.875C39.7962 46.875 39.0014 46.5458 38.4153 45.9597C37.8293 45.3737 37.5 44.5788 37.5 43.75V21.875Z"
-                                                                    fill="#F6FFF7" />
-                                                                <path
-                                                                    d="M40.625 62.5C39.6979 62.5 38.7916 62.2251 38.0208 61.71C37.2499 61.1949 36.6491 60.4628 36.2943 59.6063C35.9395 58.7498 35.8467 57.8073 36.0276 56.898C36.2084 55.9887 36.6549 55.1535 37.3104 54.4979C37.966 53.8424 38.8012 53.3959 39.7105 53.2151C40.6198 53.0342 41.5623 53.127 42.4188 53.4818C43.2754 53.8366 44.0075 54.4374 44.5225 55.2083C45.0376 55.9791 45.3125 56.8854 45.3125 57.8125C45.3125 59.0557 44.8186 60.248 43.9396 61.1271C43.0605 62.0061 41.8682 62.5 40.625 62.5Z"
-                                                                    fill="#F6FFF7" />
-                                                            </svg>
-                                                            <h3 class="reminder-title">
-                                                                Apa Kamu Yakin Ingin Meminjam Buku Ini ?
-                                                            </h3>
-                                                            <p class="reminder-text">
-                                                                Durasi waktu peminjaman maksimal 7 hari, jika lebih secara otomatis buku pinjaman akan kembali ke katalog.
-                                                            </p>
-                                                            <button class="cancel-button">
-                                                                Tidak
-                                                            </button>
-                                                            <button class="confirm-button">
-                                                                Ya
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <a href="#" class="return-button" data-book-id="{{ $book->book->id }}">
+                                                    Return
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -182,4 +115,34 @@
             </div>
         </div>
     </div>
+    @section('js')
+            <script>
+                $(document).ready(function () {
+                    $('.return-button').on('click', function () {
+                        var bookId = $(this).data('book-id');
+
+                        // Send AJAX request to return the book
+                        $.ajax({
+                            url: '{{ route("bukuSaya.return") }}',
+                            method: 'POST',
+                            data: {
+                                book_id: bookId,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function (response) {
+                                // Handle success response
+                                console.log(response);
+                                // Reload the page after successfully returning the book
+                                window.location.reload();
+                            },
+                            error: function (xhr, status, error) {
+                                // Handle error response
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+                });
+
+            </script>
+    @endsection
 @endsection

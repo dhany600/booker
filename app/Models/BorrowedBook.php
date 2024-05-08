@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class BorrowedBook extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function category()
+    public function user()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function borrowedBooks()
+    public function book()
     {
-        return $this->hasMany(BorrowedBook::class);
+        return $this->belongsTo(Book::class, 'book_id');
     }
 }

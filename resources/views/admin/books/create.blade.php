@@ -108,16 +108,14 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="category_id" class="form-label">
-                                            Kategori
-                                        </label>
+                                        <label for="category_id" class="form-label">Kategori</label>
                                         <select name="category_id" id="category_id" class="w-100 form-control">
-                                            <option value="volvo">Volvo</option>
-                                            <option value="saab">Saab</option>
-                                            <option value="mercedes">Mercedes</option>
-                                            <option value="audi">Audi</option>
+                                            @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
+
                                     <button type="submit" class="btn btn-primary">
                                         Create Post
                                     </button>
@@ -137,19 +135,28 @@
 
     @section('js')
     <script>
-        function previewImage() {
-            const image = document.querySelector('#image');
-            const imgPreview = document.querySelector('.img-preview');
-
-            imgPreview.style.display = 'block';
-
-            const ofReader = new FileReader();
-            ofReader.readAsDataURL(image.files[0]);
-
-            ofReader.onload = function(ofReader){
-                imgPreview.src = ofReader.target.result;
-            }
-        }
+        $(document).ready(function () {
+            $('.confirm-button').click(function () {
+                var bookId = $(this).val();
+                $.ajax({
+                    url: '{{ route("borrow.book") }}',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        book_id: bookId
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        // Handle success, e.g., show a success message
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        // Handle errors, e.g., show an error message
+                    }
+                });
+            });
+        });
     </script>
+
     @endsection
 @endsection

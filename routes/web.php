@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuSayaController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,11 +23,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+// ample-book.index');
+// });
 Route::get('/example-book', function () {
     return view('example-book.index');
 });
 
-// Route::get('/login', [AuthController::class, 'index'])->name('auth.login');
+// [AuthController::class, 'index'])->name('auth.login');
 // Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
 // Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 
@@ -36,8 +39,18 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('home.about');
+
+Route::post('/borrow-book', [CatalogController::class, 'borrowBook'])->name('borrow.book');
 Route::resource('/katalog', CatalogController::class, ['names' => 'catalog']);
-Route::resource('/buku-saya', BukuSayaController::class, ['names' => 'buku-saya']);
+
+
+Route::post('/kembalikan-buku', [BukuSayaController::class, 'return'])->name('bukuSaya.return');
+Route::get('/baca-buku', [BukuSayaController::class, 'bacaBuku'])->name('bukuSaya.bacaBuku');
+Route::resource('/buku-saya', BukuSayaController::class, ['names' => 'bukuSaya']);
+
+Route::get('/buku-favorit', [BukuSayaController::class, 'bukuFavorit'])->name('bukuFavorit');
+Route::get('/riwayat-pinjam', [BukuSayaController::class, 'riwayatPinjam'])->name('riwayatPinjam');
+Route::resource('/profile', ProfileController::class, ['names' => 'profile']);
 
 Auth::routes(['verify' => true]);
 

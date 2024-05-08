@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
@@ -39,7 +40,10 @@ class AdminBookController extends Controller
      */
     public function create()
     {
-        return view('admin.books.create');
+        $categories = Category::all();
+        return view('admin.books.create', [
+            'categories' => $categories,
+        ]);
     }
 
     /**

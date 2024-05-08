@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <div class="page-catalog">
+    <div class="page-buku-saya buku-favorit-page">
         <div class="background-color">
             <div class="container">
                 <div class="row mb-4">
@@ -30,86 +30,43 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <h3 class="text-title">
-                            Kategori
-                        </h3>
-                        <div class="category-area">
-                            <div class="card {{ request()->has('category') ? '' : 'active-card' }}">
-                                <a href="{{ route('catalog.index')}}">
-                                    <img class="category-image" src="{{ asset('storage/gambar_buku/rekomendasi.png') }}" alt="">
-                                    <p class="category-text">Rekomendasi</p>
-                                </a>
-                            </div>
-                            @foreach ($categories as $index => $category)
-                            <div class="card {{ request()->input('category') == $category->id ? 'active-card' : '' }}">
-                                <a href="{{ route('catalog.index', ['category' => $category->id]) }}">
-                                    <img class="category-image"
-                                        src="{{ asset('storage/' . $category->gambar_kategori) }}" alt="">
-                                    <p class="category-text">{{ $category->nama_kategori }}</p>
-                                </a>
-                            </div>
-                            @if ($index == 1)
-                            @break
-                            @endif
-                            @endforeach
-
-
-                            <div class="card">
-                                <button type="button" class="borrow-button" data-toggle="modal"
-                                data-target="#categoryModal" style="background-color: unset; border: none; min-width: unset; padding: 0">
-                                    <p class="category-text">
-                                        Tampilkan Semua Kategori
-                                    </p>
-                                </button>
-                            </div>
-                            
-                            <div class="modal modal-category-area fade" id="categoryModal" tabindex="-3" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="flex-area">
-                                                <div class="card">
-                                                    <a href="{{ route('catalog.index')}}">
-                                                        <img class="category-image"
-                                                            src="{{ asset('storage/gambar_buku/rekomendasi.png') }}" alt="">
-                                                        <p class="category-text">
-                                                            Rekomendasi
-                                                        </p>
-                                                    </a>
-                                                </div>
-                                                @foreach ($categories as $category)
-                                                <div class="card">
-                                                    <a href="{{ route('catalog.index', ['category' => $category->id]) }}">
-                                                        <img class="category-image"
-                                                            src="{{ asset('storage/' . $category->gambar_kategori) }}"
-                                                            alt="">
-                                                        <p class="category-text">
-                                                            {{ $category->nama_kategori }}
-                                                        </p>
-                                                    </a>
-                                                </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                        <div class="buku-saya-area">
+                            <a href="{{ route('bukuSaya.index') }}" class="menu-link {{ Request::is('buku-saya') ? 'active-link' : '' }}">
+                                <p class="category-text">
+                                    Buku Saya
+                                </p>
+                            </a>
+                            <a href="{{ route('bukuFavorit') }}" class="menu-link {{ Request::is('buku-favorit') ? 'active-link' : 'awikwok' }}">
+                                <p class="category-text">
+                                    Buku Favorit
+                                </p>
+                            </a>
+                            <a href="{{ route('riwayatPinjam') }}" class="menu-link {{ Request::is('riwayat-pinjam') ? 'active-link' : 'awikwok' }}">
+                                <p class="category-text">
+                                    Riwayat Pinjaman
+                                </p>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-10">
                         <h3 class="text-title">
-                            Rekomendasi
+                            Buku Favorit
                         </h3>
                         <div class="book-area">
                             @foreach ($books as $book)
                             <div class="card">
                                 <div class="flex-container">
+                                    <div class="favorit-area">
+                                        <button href="#" class="favorite-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-heart">
+                                                <path
+                                                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                                                </svg>
+                                        </button>
+                                    </div>
                                     <div class="left-item">
                                         <img src="{{ asset('storage/' . $book->gambar_buku) }}" alt=""
                                             class="book-image">
@@ -122,7 +79,7 @@
                                             {{ $book->pengarang }}
                                         </p>
                                         <div class="flex-area">
-                                            <div class="left-area {{ $book->book_left == 0 ? 'no-item-left' : '' }}">
+                                            <div class="left-area">
                                                 <div class="book-stock">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
                                                         viewBox="0 0 13 13" fill="none">
@@ -130,7 +87,7 @@
                                                             d="M12.0732 10.8994L10.1285 1.65331C10.1034 1.5324 10.0546 1.41765 9.98494 1.31565C9.9153 1.21365 9.8262 1.12641 9.72275 1.05895C9.6193 0.991494 9.50354 0.945139 9.38212 0.922551C9.26071 0.899964 9.13602 0.901589 9.01523 0.927334L6.27246 1.51679C6.02985 1.56991 5.81803 1.71667 5.68307 1.92515C5.5481 2.13363 5.50091 2.38697 5.55176 2.63007L7.49648 11.8762C7.53982 12.0871 7.65447 12.2767 7.82114 12.4131C7.98782 12.5495 8.19636 12.6243 8.41172 12.625C8.47829 12.6249 8.54467 12.6178 8.60977 12.6039L11.3525 12.0144C11.5954 11.9612 11.8075 11.8141 11.9425 11.6053C12.0774 11.3965 12.1244 11.1427 12.0732 10.8994ZM6.46875 2.43847C6.46875 2.43495 6.46875 2.43319 6.46875 2.43319L9.21094 1.84726L9.40606 2.77714L6.66387 3.36718L6.46875 2.43847ZM7.05469 5.21464L6.8584 4.283L9.60176 3.69354L9.79746 4.62519L7.05469 5.21464ZM11.1562 11.098L8.41406 11.684L8.21895 10.7541L10.9611 10.1641L11.1562 11.0928C11.1562 11.0963 11.1562 11.098 11.1562 11.098ZM4.59375 1.37499H1.78125C1.53261 1.37499 1.29415 1.47376 1.11834 1.64958C0.942522 1.82539 0.84375 2.06385 0.84375 2.31249V11.6875C0.84375 11.9361 0.942522 12.1746 1.11834 12.3504C1.29415 12.5262 1.53261 12.625 1.78125 12.625H4.59375C4.84239 12.625 5.08085 12.5262 5.25666 12.3504C5.43248 12.1746 5.53125 11.9361 5.53125 11.6875V2.31249C5.53125 2.06385 5.43248 1.82539 5.25666 1.64958C5.08085 1.47376 4.84239 1.37499 4.59375 1.37499ZM1.78125 2.31249H4.59375V3.24999H1.78125V2.31249ZM4.59375 11.6875H1.78125V10.75H4.59375V11.6875Z"
                                                             fill="#2FBE46" />
                                                     </svg>
-                                                    {{ $book->book_quantity - $book->book_left }} / {{ $book->book_quantity }}
+                                                    {{ $book->book_left - $book->book_quantity }} / {{ $book->book_quantity }}
                                                 </div>
                                             </div>
                                             <div class="right-area">
@@ -177,7 +134,7 @@
                                                                         <p class="limit-text-title">
                                                                             Limit : 
                                                                             <p class="limit-name">
-                                                                                {{ $book->book_quantity - $book->book_left }} / {{ $book->book_quantity }}
+                                                                                02 / 05
                                                                             </p>
                                                                         </p>
                                                                     </div>
@@ -224,10 +181,10 @@
                                                             <p class="reminder-text">
                                                                 Durasi waktu peminjaman maksimal 7 hari, jika lebih secara otomatis buku pinjaman akan kembali ke katalog.
                                                             </p>
-                                                            <button class="cancel-button" data-dismiss="modal">
+                                                            <button class="cancel-button">
                                                                 Tidak
                                                             </button>
-                                                            <button class="confirm-button" id="borrowBookButton{{ $book->id }}" value="{{ $book->id }}">
+                                                            <button class="confirm-button">
                                                                 Ya
                                                             </button>
                                                         </div>
@@ -246,31 +203,4 @@
             </div>
         </div>
     </div>
-    @section('js')
-        <script>
-            $(document).ready(function () {
-                $('.confirm-button').click(function () {
-                    var bookId = $(this).val();
-                    $.ajax({
-                        url: '{{ route("borrow.book") }}',
-                        method: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            book_id: bookId
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            // Handle success, e.g., show a success message
-                            window.location.reload();
-                        },
-                        error: function (xhr, status, error) {
-                            console.error(xhr.responseText);
-                            // Handle errors, e.g., show an error message
-                        }
-                    });
-                });
-            });
-        </script>
-
-    @endsection
 @endsection
