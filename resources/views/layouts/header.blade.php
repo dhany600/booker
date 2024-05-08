@@ -13,17 +13,14 @@
                 <div class="col-md-6">
                     <div class="button-container">
                         <div class="item-container">
-                            <p class="student-name-text">
+                            <a href="{{ route('profile.index') }}" class="student-name-text">
                                 {{ auth()->user()->nama_lengkap }}
-                            </p>
+                            </a>
                             <p class="student-id-number">
                                 {{ auth()->user()->nomor_induk }}
                             </p>
                         </div>
                         <div class="item-container">
-                            {{-- <a class="logout-button" href="#">
-                                Logout
-                            </a> --}}
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                                 <!-- Add CSRF token for security -->
@@ -32,6 +29,9 @@
                             <a href="#"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
+                            </a>
+                            <a href="/admin-dashboard/book">
+                                Dashboard
                             </a>
                         </div>
                     </div>
@@ -61,8 +61,8 @@
                                         Katalog
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                <li class="nav-item {{ Request::is('buku-saya', 'buku-favorit', 'riwayat-pinjam') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('bukuSaya.index') }}">
                                         Buku Saya
                                     </a>
                                 </li>
