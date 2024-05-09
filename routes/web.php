@@ -45,7 +45,11 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('home.about');
 
-Route::post('/borrow-book', [CatalogController::class, 'borrowBook'])->name('borrow.book');
+Route::group([
+    'middleware' => ['auth', 'verified'],
+], function () {
+    
+Route::post('/borrow-book', [CatalogController::class, 'borrowBook'])->name('borrow.book')->middleware(['auth', 'verified']);
 Route::resource('/katalog', CatalogController::class, ['names' => 'catalog']);
 
 
@@ -61,6 +65,7 @@ Route::resource('/favorite', FavoriteBukuController::class, ['names' => 'favorit
 Route::get('/buku-favorit', [BukuSayaController::class, 'bukuFavorit'])->name('bukuFavorit');
 Route::get('/riwayat-pinjam', [BukuSayaController::class, 'riwayatPinjam'])->name('riwayatPinjam');
 Route::resource('/profile', ProfileController::class, ['names' => 'profile']);
+});
 
 Auth::routes(['verify' => true]);
 
