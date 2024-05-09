@@ -10,18 +10,19 @@
                     <div class="col-md-10">
                         <div class="row">
                             <div class="col-md-10">
-                                <form class="form-inline my-2 my-lg-0">
-                                    <input class="search-input form-control w-100" type="search" placeholder="Search" aria-label="Search">
+                                <form class="form-inline my-2 my-lg-0" id="form-filter">
+                                    <div class="d-flex w-100" style="gap: 5px">
+                                        <input type="hidden" name="order" id="order">
+                                        <input class="search-input form-control w-100" type="search" placeholder="Search" name="search" value="{{ request('search') }}" aria-label="Search">
+                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                    </div>
                                 </form>
                             </div>
                             <div class="col-md-2">
                                 <div class="">
-                                    <select class="" id="exampleFormControlSelect1">
-                                        <option>Filter</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <select id="exampleFormControlSelect1" onchange="$('#order').val(this.value); $('#form-filter').submit();">
+                                        <option value="desc" {{ request('order') == 'desc' ? 'selected' : '' }}>Urutkan dari yang terbaru</option>
+                                        <option value="asc" {{ request('order') == 'asc' ? 'selected' : '' }}>Urutkan dari awal</option>
                                     </select>
                                 </div>
                             </div>
@@ -59,45 +60,28 @@
                                             <th>ID</th>
                                             <th>User</th>
                                             <th>Date</th>
-                                            <th>Status</th>
                                             <th>Reason</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>183</td>
-                                            <td>John Doe</td>
-                                            <td>11-7-2014</td>
-                                            <td><span class="tag tag-success">Approved</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>219</td>
-                                            <td>Alexander Pierce</td>
-                                            <td>11-7-2014</td>
-                                            <td><span class="tag tag-warning">Pending</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>657</td>
-                                            <td>Bob Doe</td>
-                                            <td>11-7-2014</td>
-                                            <td><span class="tag tag-primary">Approved</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>175</td>
-                                            <td>Mike Doe</td>
-                                            <td>11-7-2014</td>
-                                            <td><span class="tag tag-danger">Denied</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.
-                                            </td>
-                                        </tr>
+                                        @forelse ($activityLogs as $key => $item)
+                                            <tr>
+                                                <td>{{ $activityLogs->firstItem() + $key }}</td>
+                                                <td>{{ $item->causer?->nama_lengkap }}</td>
+                                                <td>{{ $item->created_at->format('d F Y H:i') }}</td>
+                                                <td>{{ $item->description }}</td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="4" class="text-center">No data available</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
+                            </div>
+
+                            <div class="d-flex">
+                                {{ $activityLogs->links() }}
                             </div>
                     </div>
                 </div>

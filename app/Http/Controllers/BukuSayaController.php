@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\BorrowedBook;
+use App\Service\ActivityLogService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,7 @@ class BukuSayaController extends Controller
             $book = Book::find($bookId);
             if ($book) {
                 $book->increment('book_left');
+                ActivityLogService::log('Mengembalikan buku ' . $book->nama_buku, $book, 'mengembalikan buku');
             }
 
             return response()->json(['message' => 'Book returned successfully'], 200);
@@ -106,8 +108,11 @@ class BukuSayaController extends Controller
     public function riwayatPinjam()
     {
         $books = Book::all();
+        $activityLogs = ActivityLogService::getActivityLogs();
+
         return view('buku-saya.riwayat-pinjam', [
             'books' => $books,
+            'activityLogs' => $activityLogs,
         ]);
     }
 

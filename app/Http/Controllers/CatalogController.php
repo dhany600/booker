@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\BorrowedBook;
 use App\Models\Category;
+use App\Service\ActivityLogService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,7 +64,10 @@ class CatalogController extends Controller
         $book = Book::find($bookId);
         if ($book) {
             $book->decrement('book_left'); // Reduce book_left by 1
+
+            ActivityLogService::log('Meminjam buku ' . $book->nama_buku, $book, 'meminjam buku');
         }
+
 
         return response()->json(['message' => 'Book borrowed successfully'], 200);
     }

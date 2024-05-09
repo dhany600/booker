@@ -35,7 +35,7 @@ Route::get('/example-book', function () {
 // Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
 // Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 
-Route::resource('/admin-dashboard/book', AdminBookController::class, ['names' => 'admin.book']);
+Route::resource('/admin-dashboard/book', AdminBookController::class, ['names' => 'admin.book'])->middleware('role:admin');
 
 Auth::routes();
 
