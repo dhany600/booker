@@ -91,9 +91,15 @@ class BukuSayaController extends Controller
 
     public function bukuFavorit()
     {
-        $books = Book::all();
+        $user = Auth::user();
+
+        // Fetch the favorite books for the current user
+        $favoriteBooks = $user->favorites()->with('book')->get();
+        $userFavorites = $user->favorites()->pluck('book_id')->toArray();
+
         return view('buku-saya.buku-favorit', [
-            'books' => $books,
+            'favoriteBooks' => $favoriteBooks,
+            'userFavorites' => $userFavorites,
         ]);
     }
 

@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminBookController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuSayaController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\DaftarPeminjamController;
+use App\Http\Controllers\FavoriteBukuController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +49,11 @@ Route::resource('/katalog', CatalogController::class, ['names' => 'catalog']);
 Route::post('/kembalikan-buku', [BukuSayaController::class, 'return'])->name('bukuSaya.return');
 Route::get('/baca-buku', [BukuSayaController::class, 'bacaBuku'])->name('bukuSaya.bacaBuku');
 Route::resource('/buku-saya', BukuSayaController::class, ['names' => 'bukuSaya']);
+
+Route::resource('/daftar-peminjam', DaftarPeminjamController::class, ['names' => 'daftarPeminjam']);
+
+Route::post('/favorite/{book}', [FavoriteBukuController::class, 'toggleFavorite'])->name('favorite.toggle');
+Route::resource('/favorite', FavoriteBukuController::class, ['names' => 'favorite']);
 
 Route::get('/buku-favorit', [BukuSayaController::class, 'bukuFavorit'])->name('bukuFavorit');
 Route::get('/riwayat-pinjam', [BukuSayaController::class, 'riwayatPinjam'])->name('riwayatPinjam');

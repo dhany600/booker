@@ -25,9 +25,9 @@
                 <!-- Add icons to the links using the .nav-icon class
         with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="/admin/dasboard" class="nav-link {{ Request::is('admin-dashboard/dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('daftarPeminjam.index') }}" class="nav-link {{ Request::is('daftar-peminjam') ? 'active' : '' }}">
                         <p>
-                            Dashboard
+                            Daftar Peminjam
                             {!! Request::is('admin/') ? '<i class="right fas fa-angle-left"></i>' : '' !!}
                         </p>
                     </a>

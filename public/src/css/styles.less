@@ -16,6 +16,18 @@ input{
     width: 100%;
 }
 
+.admin-dashboard-button{
+    width: 120px;
+    text-align: center;
+    padding: 5px 16px;
+    border-radius: 100px;
+    background-color: #2FBE46;
+    color: #fff;
+    display: inline-block;
+    min-width: unset;
+    border: none;
+}
+
 button, .btn{
     padding: 12px auto;
     min-width: 150px;
@@ -688,6 +700,16 @@ select {
                                             }
                                         }
                                         .modal-footer{
+                                            .favorite-button{
+                                                min-width: unset;
+                                                background-color: unset;
+                                                border: unset;
+                                            }
+                                            .active-favorite-heart{
+                                                svg{
+                                                    fill: red;
+                                                }
+                                            }
                                             .borrow-button{
                                                 text-align: center;
                                                 padding: 5px 16px;
@@ -877,6 +899,20 @@ select {
                                     }
                                 }
                             }
+                            .returned-book{
+                                .first-area{
+                                    .badge{
+                                        border: 1px solid #2FBE46;
+                                        background-color: #2fbe474d;
+                                        p{
+                                            color: #2FBE46;
+                                        }
+                                        svg{
+                                            stroke: #2FBE46;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -927,6 +963,11 @@ select {
                                 opacity: 0.7;
                                 svg{
                                     stroke: #FF0000;
+                                }
+                            }
+                            .active-favorite-heart{
+                                svg {
+                                    fill: red;
                                 }
                             }
                         }
@@ -1251,5 +1292,59 @@ select {
                 }
             }
         } 
+    }
+
+    .header-area{
+        .navbar-toggler{
+            margin: 0 auto;
+            border: none;
+            padding-bottom: 10px;
+        }
+        .button-container{
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
+    .footer-area{
+        .footer-left{
+            width: 100%;
+            border-radius: 0;
+
+            .flex-area{
+                justify-content: center;
+                row-gap: 10px;
+            }
+        }
+    }
+
+    .page-catalog{
+        .background-color{
+            .container{
+                .category-area{
+                    flex-direction: row;
+                    column-gap: 3%;
+                    margin-bottom: 20px;
+                    .card{
+                        width: 48%;
+                        place-content: center;
+                    }
+                }
+                .book-area{
+                    .card{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    .page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex {
+        flex-direction: column;
+        row-gap: 12px;
+        align-items: center;
+        .right-area{
+            width: 100%;
+        }
     }
 }

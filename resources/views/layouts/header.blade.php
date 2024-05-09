@@ -30,7 +30,7 @@
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
-                            <a href="/admin-dashboard/book">
+                            <a href="/admin-dashboard/book" class="admin-dashboard-button">
                                 Dashboard
                             </a>
                         </div>

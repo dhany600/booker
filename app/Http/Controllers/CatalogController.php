@@ -7,6 +7,7 @@ use App\Models\BorrowedBook;
 use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CatalogController extends Controller
 {
@@ -20,6 +21,9 @@ class CatalogController extends Controller
         $categories = Category::all();
         $selectedCategoryId = $request->query('category');
 
+        // Get the current user
+        $user = Auth::user();
+
         // If a category is selected, filter books by category; otherwise, get all books
         if ($selectedCategoryId) {
             $books = Book::whereHas('category', function ($query) use ($selectedCategoryId) {
@@ -29,11 +33,16 @@ class CatalogController extends Controller
             $books = Book::all();
         }
 
+        // Get the IDs of favorited books for the user
+        $userFavorites = $user->favorites()->pluck('book_id')->toArray();
+
         return view('katalog.index', [
             'books' => $books,
             'categories' => $categories,
+            'userFavorites' => $userFavorites,
         ]);
     }
+
 
 
     public function borrowBook(Request $request)
