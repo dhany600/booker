@@ -14,10 +14,10 @@
                     <div class="button-container">
                         <div class="item-container">
                             <a href="{{ route('profile.index') }}" class="student-name-text">
-                                {{ auth()->user()->nama_lengkap }}
+                                {{ auth()->user()?->nama_lengkap }}
                             </a>
                             <p class="student-id-number">
-                                {{ auth()->user()->nomor_induk }}
+                                {{ auth()->user()?->nomor_induk }}
                             </p>
                         </div>
                         <div class="item-container">
@@ -26,10 +26,16 @@
                                 <!-- Add CSRF token for security -->
                             </form>
 
+                            @auth
                             <a href="#"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
+                            @else
+                            <a href="{{ route('login') }}">
+                                Login
+                            </a>
+                            @endauth
                             @role('admin')
                             <a href="/admin-dashboard/book" class="admin-dashboard-button">
                                 Dashboard
@@ -58,16 +64,18 @@
                                         Tentang Kami
                                     </a>
                                 </li>
-                                <li class="nav-item {{ Request::is('katalog') ? 'active' : '' }}">
-                                    <a class="nav-link" href="{{ route('catalog.index') }}">
-                                        Katalog
-                                    </a>
-                                </li>
-                                <li class="nav-item {{ Request::is('buku-saya', 'buku-favorit', 'riwayat-pinjam') ? 'active' : '' }}">
-                                    <a class="nav-link" href="{{ route('bukuSaya.index') }}">
-                                        Buku Saya
-                                    </a>
-                                </li>
+                                @auth
+                                    <li class="nav-item {{ Request::is('katalog') ? 'active' : '' }}">
+                                        <a class="nav-link" href="{{ route('catalog.index') }}">
+                                            Katalog
+                                        </a>
+                                    </li>
+                                    <li class="nav-item {{ Request::is('buku-saya', 'buku-favorit', 'riwayat-pinjam') ? 'active' : '' }}">
+                                        <a class="nav-link" href="{{ route('bukuSaya.index') }}">
+                                            Buku Saya
+                                        </a>
+                                    </li>
+                                @endauth
                             </ul>
                         </div>
                     </nav>

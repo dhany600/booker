@@ -207,8 +207,6 @@
             $('#borrowBookButton').click(function() {
                 const bookId = window.bookId ?? false;
 
-                console.log(bookId);
-
                 if (!bookId) {
                     return;
                 }
@@ -226,7 +224,12 @@
                         window.location.reload();
                     },
                     error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
+                        if (xhr.status === 401) {
+                            // Handle validation error
+                            alert('Harap login terlebih dahulu');
+                            window.location.href = '{{ route("login") }}';
+                            return;
+                        }
                         // Handle errors, e.g., show an error message
                     }
                 });
