@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -22,12 +24,30 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::all();
-        // return $books;
+        $categories = Category::all();
+        $selectedCategoryId = $request->query('category');
+
+        // Get the current user
+        $user = Auth::user();
+
+        // If a category is selected, filter books by category; otherwise, get all books
+        if ($selectedCategoryId) {
+            $books = Book::whereHas('categories', function ($query) use ($selectedCategoryId) {
+                $query->where('categories.id', $selectedCategoryId);
+            })->get();
+        } else {
+            $books = Book::all();
+        }
+
+        // Get the IDs of favorited books for the user
+        $userFavorites = $user->favorites()->pluck('book_id')->toArray();
+
         return view('home', [
             'books' => $books,
+            'categories' => $categories,
+            'userFavorites' => $userFavorites,
         ]);
     }
 

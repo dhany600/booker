@@ -32,7 +32,7 @@
                                 Logout
                             </a> --}}
                             @else
-                            <a href="{{ route('login') }}">
+                            <a class="login-button-header" href="{{ route('login') }}">
                                 Login
                             </a>
                             @endauth
