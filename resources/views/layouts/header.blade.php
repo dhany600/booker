@@ -30,9 +30,11 @@
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
+                            @role('admin')
                             <a href="/admin-dashboard/book" class="admin-dashboard-button">
                                 Dashboard
                             </a>
+                            @endrole
                         </div>
                     </div>
                 </div>
