@@ -30,6 +30,18 @@
                         WELCOME BOOKERS!
                     </h3>
                     <div class="card">
+                        @if ($msg = session('error'))
+                            <div style="background: rgba(255, 0, 0, 1); border-radius: 10px; padding: 10px; margin-bottom: 5px; color: white">
+                                <strong>Warning!</strong> {{ $msg }}
+                            </div>
+                        @endif
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $item)
+                            <div style="background: rgba(255, 0, 0, 1); border-radius: 10px; padding: 10px; margin-bottom: 5px; color: white">
+                                <strong>Warning!</strong> {{ $item }}
+                            </div>
+                            @endforeach
+                        @endif
                         <form action="/login" method="POST">
                             @csrf
                             <p class="input-label">
