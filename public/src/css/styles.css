@@ -852,6 +852,12 @@ select {
 .page-buku-saya .background-color .container .book-area .card .flex-container .right-item .returned-book .first-area .badge svg {
   stroke: #2FBE46;
 }
+.page-buku-saya .background-color .container .table.table-hover thead {
+  background-color: #FFC46E;
+}
+.page-buku-saya .background-color .container .table.table-hover tbody {
+  background-color: #FFFFFF;
+}
 .buku-favorit-page .background-color .container .book-area {
   display: flex;
   flex-wrap: wrap;

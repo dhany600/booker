@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.favorite.index') }}" class="nav-link {{ Request::is('admin-dashboard/book') ? 'active' : '' }}">
+                    <a href="{{ route('admin.favorite.index') }}" class="nav-link {{ Request::is('admin-dashboard/favorite') ? 'active' : '' }}">
                         <p>
                             Favorited Book
                             {!! Request::is('admin/') ? '<i class="right fas fa-angle-left"></i>' : '' !!}
