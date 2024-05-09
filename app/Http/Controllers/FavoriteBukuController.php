@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Favorite;
+use App\Service\ActivityLogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,9 @@ class FavoriteBukuController extends Controller
         if ($isFavorited) {
             // If favorited, remove it
             $user->favorites()->where('book_id', $book->id)->delete();
+
+            ActivityLogService::log('Menghapus buku ' . $book->nama_buku . ' dari favorit', $book, 'menghapus buku dari favorit');
+
             return response()->json(['status' => 'unfavorited']);
         } else {
             // If not favorited, add it
@@ -36,6 +40,9 @@ class FavoriteBukuController extends Controller
             $favorite->book_id = $book->id;
             $favorite->user_id = $user->id;
             $favorite->save();
+
+            ActivityLogService::log('Menambahkan buku ' . $book->nama_buku . ' ke favorit', $book, 'menambahkan buku ke favorit');
+
             return response()->json(['status' => 'favorited']);
         }
     }
