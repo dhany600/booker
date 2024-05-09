@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
@@ -35,8 +40,22 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
+    }
+
+    public function verify(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            $user->email_verified_at = now();
+            $user->save();
+
+            return redirect()->route('login')->with('success', ' Memverifikasi email');
+        }
+
+        return redirect()->route('login')->with('error', 'User tidak ditemukan');
     }
 }
