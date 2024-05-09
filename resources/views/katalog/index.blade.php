@@ -167,7 +167,7 @@
                                                                 <div class="inner-flex-area">
                                                                     <div class="left-area">
                                                                         <p class="writer-text-title">
-                                                                            Penulis : 
+                                                                            Penulis :
                                                                             <p class="writer-name">
                                                                                 {{ $book->pengarang }}
                                                                             </p>
@@ -186,6 +186,15 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
+                                                        <button class="favorite-button @if(in_array($book->id, $userFavorites)) active-favorite-heart @endif" value="{{ $book->id }}">
+                                                            <svg id="fav1" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="#EE0000" stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round" class="lucide lucide-heart">
+                                                                <path
+                                                                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                                                            </svg>
+                                                        </button>
                                                         <button type="button" class="borrow-button btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#borrowModal{{ $book->id }}">
                                                             Pinjam
                                                         </button>
@@ -266,6 +275,32 @@
                         error: function (xhr, status, error) {
                             console.error(xhr.responseText);
                             // Handle errors, e.g., show an error message
+                        }
+                    });
+                });
+
+                $('.favorite-button').click(function () {
+                    var bookId = $(this).val();
+                    var url = "{{ route('favorite.toggle', ':bookId') }}".replace(':bookId', bookId);
+
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        dataType: 'json',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (response) {
+                            if (response.status === 'favorited') {
+                                // Update UI to show the book is favorited
+                                $('.favorite-button[value="' + bookId + '"]').addClass('active-favorite-heart');
+                            } else if (response.status === 'unfavorited') {
+                                // Update UI to show the book is unfavorited
+                                $('.favorite-button[value="' + bookId + '"]').removeClass('active-favorite-heart');
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
                         }
                     });
                 });
