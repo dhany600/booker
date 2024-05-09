@@ -30,6 +30,13 @@
                         WELCOME BOOKERS!
                     </h3>
                     <div class="card">
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $item)
+                            <div style="background: rgba(255, 0, 0, 1); border-radius: 10px; padding: 10px; margin-bottom: 5px; color: white">
+                                <strong>Warning!</strong> {{ $item }}
+                            </div>
+                            @endforeach
+                        @endif
                         <form action="/register" style="margin-bottom: 0;" method="post">
                             @method('POST')
                             @csrf
