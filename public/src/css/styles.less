@@ -101,6 +101,13 @@ select {
     }
 }
 
+.login-button-header{
+    padding: 8px 40px;
+    color: #fff;
+    border-radius: 100px;
+    background-color: #2FBE46;
+}
+
 .login-page{
     .background-area{
         background-color: #F4D9AF;
@@ -357,6 +364,49 @@ select {
                 .active-card{
                     background-color: #ECC58B;
                 }
+                .modal-category-area{
+                    .modal-dialog{
+                        max-width: 800px;
+                        width: 100%;
+                        .modal-content{
+                            background-color: #F9EFDF;
+                            .modal-header {
+                                align-self: flex-end;
+                                padding: 0;
+        
+                                button {
+                                    padding: 22px 22px 0 0;
+                                    margin: 0;
+                                    min-width: unset;
+                                }
+                            }
+                            .modal-body{
+                                .flex-area{
+                                    display: flex;
+                                    flex-direction: row;
+                                    flex-wrap: wrap;
+                                    column-gap: 2%;
+                                    row-gap: 16px;
+                                    .card{
+                                        width: 23.5%;
+                                        a{
+                                            display: flex;
+                                            flex-wrap: nowrap;
+                                            height: 100%;
+                                            flex-direction: column;
+                                            column-gap: 16px;
+                                            .category-image{
+                                                max-height: 90px;
+                                                width: auto;
+                                                height: 100%;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             .book-area{
                 display: flex;
@@ -437,9 +487,168 @@ select {
                                         border-radius: 100px;
                                         background-color: #2FBE46;
                                     }
+                                    .favorite-button{
+                                        min-width: unset;
+                                        background-color: unset;
+                                        border: unset;
+                                    }
+                                    .active-favorite-heart{
+                                        svg{
+                                            fill: red;
+                                        }
+                                    }
+                                }
+                            }
+                            .modal-borrow-book{
+                                .modal-dialog{
+                                    padding: 30px;
+                                    max-width: 850px;
+                                    .modal-content{
+                                        background-color: #F9EFDF;
+                                        .modal-header{
+                                            align-self: flex-end;
+                                            padding: 0;
+                                            button{
+                                                padding: 22px 22px 0 0;
+                                                margin: 0;
+                                                min-width: unset;
+                                            }
+                                        }
+                                        .modal-body{
+                                            .modal-flex{
+                                                display: flex;
+                                                flex-wrap: wrap;
+                                                flex-direction: row;
+                                                column-gap: 3%;
+                                                .left-area{
+                                                    width: 33%;
+                                                    .book-image{
+                                                        width: 100%;
+                                                    }
+                                                }
+                                                .right-area{
+                                                    width: 64%;
+                                                    .book-title{
+                                                        font-size: 16px;
+                                                        font-weight: 700;
+                                                        max-height: unset;
+                                                        margin-bottom: 34px;
+                                                        text-align: left;
+                                                    }
+                                                    .book-synopsis{
+                                                        margin-bottom: 21px;
+                                                        font-size: 15px;
+                                                        font-weight: 400;
+                                                    }
+                                                    .inner-flex-area{
+                                                        display: flex;
+                                                        flex-direction: row;
+                                                        justify-content: space-between;
+                                                        .left-area{
+                                                            width: 50%;
+                                                            .writer-text-title{
+                                                                display: inline-block;
+                                                                font-size: 15px;
+                                                            }
+                                                            .writer-name{
+                                                                display: inline-block;
+                                                                font-size: 15px;
+                                                                padding-left: 10px;
+                                                                color: #9A671A;
+                                                            }
+                                                        }
+                                                        .right-area{
+                                                            .limit-text-title{
+                                                                display: inline-block;
+                                                                font-size: 15px;
+                                                            }
+                                                            .limit-name{
+                                                                display: inline-block;
+                                                                font-size: 15px;
+                                                                padding-left: 10px;
+                                                                color: #9A671A;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        .modal-footer{
+                                            .favorite-button{
+                                                min-width: unset;
+                                                background-color: unset;
+                                                border: unset;
+                                            }
+                                            .active-favorite-heart{
+                                                svg{
+                                                    fill: red;
+                                                }
+                                            }
+                                            .borrow-button{
+                                                text-align: center;
+                                                padding: 5px 16px;
+                                                border-radius: 100px;
+                                                background-color: #2FBE46;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.confirmation-modal {
+    .modal-dialog {
+        .modal-content {
+            position: relative;
+
+            .modal-body {
+                position: static;
+
+                .modal-flex {
+                    place-content: center;
+                    text-align: center;
+                    row-gap: 20px;
+
+                    svg {
+                        position: absolute;
+                        top: 10%;
+                        transform: translateY(-50%) translateX(-50%);
+                        left: 50%;
+                    }
+
+                    .reminder-title {
+                        font-size: 16px;
+                        font-weight: 500;
+                    }
+
+                    .reminder-text {
+                        font-size: 15px;
+                        font-weight: 400;
+                        margin-bottom: 10px;
+                    }
+
+                    .cancel-button {
+                        text-align: center;
+                        padding: 5px 16px;
+                        color: #fff;
+                        border: none;
+                        border-radius: 100px;
+                        background-color: #EE0000;
+                    }
+
+                    .confirm-button {
+                        text-align: center;
+                        padding: 5px 16px;
+                        color: #fff;
+                        border: none;
+                        border-radius: 100px;
+                        background-color: #2FBE46;
                     }
                 }
             }
@@ -732,7 +941,7 @@ select {
                                                 row-gap: 20px;
                                                 svg {
                                                     position: absolute;
-                                                    top: 0;
+                                                    top: 10%;
                                                     transform: translateY(-50%) translateX(-50%);
                                                     left: 50%;
                                                 }
@@ -917,6 +1126,35 @@ select {
                     }
                 }
             }
+            .table.table-hover{
+                thead{
+                    background-color: #FFC46E;
+                }
+                tbody{
+                    background-color: #FFFFFF;
+                }
+            }
+        }
+    }
+}
+
+.category-flex-area{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    .category-flex-container{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        column-gap: 8px;
+        align-items: center;
+        .input-checkbox-square{
+            width: 16px;
+        }
+        .input-checkbox-label{
+            flex: 1;
         }
     }
 }
@@ -1123,7 +1361,7 @@ select {
                                                 row-gap: 20px;
                                                 svg {
                                                     position: absolute;
-                                                    top: 0;
+                                                    top: 10%;
                                                     transform: translateY(-50%) translateX(-50%);
                                                     left: 50%;
                                                 }
@@ -1318,7 +1556,7 @@ select {
         }
     }
 
-    .page-catalog{
+    .page-catalog, .page-home{
         .background-color{
             .container{
                 .category-area{
@@ -1334,17 +1572,84 @@ select {
                     .card{
                         width: 100%;
                     }
+                    .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex {
+                        flex-direction: column;
+                        row-gap: 12px;
+                        align-items: center;
+    
+                        .right-area {
+                            width: 100%;
+                        }
+                    }
                 }
             }
         }
     }
 
-    .page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex {
-        flex-direction: column;
-        row-gap: 12px;
-        align-items: center;
-        .right-area{
-            width: 100%;
+    .page-home{
+        .background-color{
+            .container{
+                .book-area{
+                    .card{
+                        .flex-container{
+                            align-items: center ;
+                            flex-direction: column;
+                            .left-item{
+                                width: 100%;
+                                text-align: center;
+                                .book-image{
+                                    height: 160px;
+                                    width: auto;
+                                    margin-bottom: 16px;
+                                }
+                            }
+                            .right-item{
+                                .flex-area{
+                                    row-gap: 10px;
+                                    justify-content: center;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
+
+
+    .page-about-us{
+        .background-color{
+            .container {
+                .flex-container{
+                    flex-direction: column;
+                    .left-item{
+                        width: 100%;
+                        img{
+                            position: relative;
+                            left: auto;
+                            top: auto;
+                            width: 100%;
+                            transform: unset;
+                            margin-bottom: 16px;
+                        }
+                    } 
+                    .right-item{
+                        position: relative;
+                        top: auto;
+                        left: auto;
+                        transform: unset;
+                        width: 100%;
+                        .title-text{
+                            font-size: 40px;
+                            text-align: center;
+                            margin-bottom: 20px;
+                        }
+                    }
+                }
+            }
+        } 
+        
+
+    }
+
 }

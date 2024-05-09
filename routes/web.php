@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminBookController;
+use App\Http\Controllers\AdminFavoritController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuSayaController;
 use App\Http\Controllers\CatalogController;
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
 // ample-book.index');
 // });
@@ -36,6 +37,8 @@ Route::get('/example-book', function () {
 // Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 
 Route::resource('/admin-dashboard/book', AdminBookController::class, ['names' => 'admin.book'])->middleware('role:admin');
+
+Route::resource('/admin-dashboard/favorite', AdminFavoritController::class, ['names' => 'admin.favorite']);
 
 Auth::routes();
 

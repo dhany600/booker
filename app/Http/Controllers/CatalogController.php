@@ -27,8 +27,8 @@ class CatalogController extends Controller
 
         // If a category is selected, filter books by category; otherwise, get all books
         if ($selectedCategoryId) {
-            $books = Book::whereHas('category', function ($query) use ($selectedCategoryId) {
-                $query->where('id', $selectedCategoryId);
+            $books = Book::whereHas('categories', function ($query) use ($selectedCategoryId) {
+                $query->where('categories.id', $selectedCategoryId);
             })->get();
         } else {
             $books = Book::all();

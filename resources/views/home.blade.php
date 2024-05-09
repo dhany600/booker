@@ -34,22 +34,72 @@
                             Kategori
                         </h3>
                         <div class="category-area">
-                            <div class="card active-card">
-                                <a href="#">
-                                    <img class="category-image" src="{{ asset('src/img/Screen_Shot_2024-04-30_at_00.39 1.png') }}" alt="">
-                                    <p class="category-text">
-                                        Rekomendasi
-                                    </p>
+                            <div class="card {{ request()->has('category') ? '' : 'active-card' }}">
+                                <a href="{{ route('catalog.index')}}">
+                                    <img class="category-image" src="{{ asset('storage/gambar_buku/rekomendasi.png') }}" alt="">
+                                    <p class="category-text">Rekomendasi</p>
                                 </a>
                             </div>
+                            @foreach ($categories as $index => $category)
+                            <div class="card {{ request()->input('category') == $category->id ? 'active-card' : '' }}">
+                                <a href="{{ route('catalog.index', ['category' => $category->id]) }}">
+                                    <img class="category-image"
+                                        src="{{ asset('storage/' . $category->gambar_kategori) }}" alt="">
+                                    <p class="category-text">{{ $category->nama_kategori }}</p>
+                                </a>
+                            </div>
+                            @if ($index == 1)
+                            @break
+                            @endif
+                            @endforeach
+
+
                             <div class="card">
-                                <a href="#">
-                                    <img class="category-image" src="{{ asset('src/img/Screen_Shot_2024-04-30_at_00.39 1.png') }}" alt="">
+                                <button type="button" class="borrow-button" data-toggle="modal"
+                                data-target="#categoryModal" style="background-color: unset; border: none; min-width: unset; padding: 0">
                                     <p class="category-text">
-                                        Rekomendasi
+                                        Tampilkan Semua Kategori
                                     </p>
-                                </a>
+                                </button>
                             </div>
+                            
+                            <div class="modal modal-category-area fade" id="categoryModal" tabindex="-3" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="flex-area">
+                                                <div class="card">
+                                                    <a href="{{ route('catalog.index')}}">
+                                                        <img class="category-image"
+                                                            src="{{ asset('storage/gambar_buku/rekomendasi.png') }}" alt="">
+                                                        <p class="category-text">
+                                                            Rekomendasi
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                                @foreach ($categories as $category)
+                                                <div class="card">
+                                                    <a href="{{ route('catalog.index', ['category' => $category->id]) }}">
+                                                        <img class="category-image"
+                                                            src="{{ asset('storage/' . $category->gambar_kategori) }}"
+                                                            alt="">
+                                                        <p class="category-text">
+                                                            {{ $category->nama_kategori }}
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="col-md-10">
@@ -80,15 +130,15 @@
                                                 </p>
                                             </div>
                                             <div class="right-area">
-                                                <svg id="fav1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="#EE0000" stroke-width="2"
-                                                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart">
-                                                    <path
-                                                        d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                                                <button class="favorite-button @if(in_array($book->id, $userFavorites)) active-favorite-heart @endif" value="{{ $book->id }}">
+                                                    <svg id="fav1" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="#EE0000" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="lucide lucide-heart">
+                                                        <path
+                                                            d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                                                     </svg>
-                                                <label for="fav1">
-                                                    Favorit
-                                                </label>
+                                                </button>
                                                 <a href="#" class="borrow-button" data-toggle="modal" data-target="#exampleModal{{ $book->id }}">
                                                     Pinjam
                                                 </a>
@@ -200,13 +250,22 @@
             </div>
         </div>
     </div>
+    <div id="auth-status" data-auth="{{ auth()->check() ? 'true' : 'false' }}"></div>
+
 @endsection
 @section('js')
     <script>
         $(document).ready(function() {
+            var isAuthenticated = $('#auth-status').data('auth') === 'true';
             $('#borrowBookButton').click(function() {
                 const bookId = window.bookId ?? false;
 
+                if (!isAuthenticated) {
+                    // If not authenticated, redirect to the login page
+                    window.location.href = "{{ route('login') }}";
+                    return;
+                }
+                
                 if (!bookId) {
                     return;
                 }
@@ -231,6 +290,38 @@
                             return;
                         }
                         // Handle errors, e.g., show an error message
+                    }
+                });
+            });
+
+            $('.favorite-button').click(function () {
+                var bookId = $(this).val();
+                var url = "{{ route('favorite.toggle', ':bookId') }}".replace(':bookId', bookId);
+
+                if (!isAuthenticated) {
+                    // If not authenticated, redirect to the login page
+                    window.location.href = "{{ route('login') }}";
+                    return;
+                }
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        if (response.status === 'favorited') {
+                            // Update UI to show the book is favorited
+                            $('.favorite-button[value="' + bookId + '"]').addClass('active-favorite-heart');
+                        } else if (response.status === 'unfavorited') {
+                            // Update UI to show the book is unfavorited
+                            $('.favorite-button[value="' + bookId + '"]').removeClass('active-favorite-heart');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
                     }
                 });
             });

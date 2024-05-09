@@ -27,12 +27,12 @@
                             </form>
 
                             @auth
-                            <a href="#"
+                            {{-- <a href="#"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
-                            </a>
+                            </a> --}}
                             @else
-                            <a href="{{ route('login') }}">
+                            <a class="login-button-header" href="{{ route('login') }}">
                                 Login
                             </a>
                             @endauth

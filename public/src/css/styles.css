@@ -93,6 +93,12 @@ select {
 .category-area .active-card {
   background-color: #ECC58B;
 }
+.login-button-header {
+  padding: 8px 40px;
+  color: #fff;
+  border-radius: 100px;
+  background-color: #2FBE46;
+}
 .login-page .background-area {
   background-color: #F4D9AF;
   display: flex;
@@ -335,6 +341,44 @@ select {
 .page-home .background-color .container .category-area .active-card {
   background-color: #ECC58B;
 }
+.page-home .background-color .container .category-area .modal-category-area .modal-dialog {
+  max-width: 800px;
+  width: 100%;
+}
+.page-home .background-color .container .category-area .modal-category-area .modal-dialog .modal-content {
+  background-color: #F9EFDF;
+}
+.page-home .background-color .container .category-area .modal-category-area .modal-dialog .modal-content .modal-header {
+  align-self: flex-end;
+  padding: 0;
+}
+.page-home .background-color .container .category-area .modal-category-area .modal-dialog .modal-content .modal-header button {
+  padding: 22px 22px 0 0;
+  margin: 0;
+  min-width: unset;
+}
+.page-home .background-color .container .category-area .modal-category-area .modal-dialog .modal-content .modal-body .flex-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 2%;
+  row-gap: 16px;
+}
+.page-home .background-color .container .category-area .modal-category-area .modal-dialog .modal-content .modal-body .flex-area .card {
+  width: 23.5%;
+}
+.page-home .background-color .container .category-area .modal-category-area .modal-dialog .modal-content .modal-body .flex-area .card a {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+  flex-direction: column;
+  column-gap: 16px;
+}
+.page-home .background-color .container .category-area .modal-category-area .modal-dialog .modal-content .modal-body .flex-area .card a .category-image {
+  max-height: 90px;
+  width: auto;
+  height: 100%;
+}
 .page-home .background-color .container .book-area {
   display: flex;
   flex-wrap: wrap;
@@ -417,6 +461,141 @@ select {
 .page-home .background-color .container .book-area .card .flex-container .right-item .flex-area .right-area .borrow-button {
   padding: 8px 40px;
   color: #fff;
+  border-radius: 100px;
+  background-color: #2FBE46;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .flex-area .right-area .favorite-button {
+  min-width: unset;
+  background-color: unset;
+  border: unset;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .flex-area .right-area .active-favorite-heart svg {
+  fill: red;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog {
+  padding: 30px;
+  max-width: 850px;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content {
+  background-color: #F9EFDF;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-header {
+  align-self: flex-end;
+  padding: 0;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-header button {
+  padding: 22px 22px 0 0;
+  margin: 0;
+  min-width: unset;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  column-gap: 3%;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .left-area {
+  width: 33%;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .left-area .book-image {
+  width: 100%;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area {
+  width: 64%;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .book-title {
+  font-size: 16px;
+  font-weight: 700;
+  max-height: unset;
+  margin-bottom: 34px;
+  text-align: left;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .book-synopsis {
+  margin-bottom: 21px;
+  font-size: 15px;
+  font-weight: 400;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area .left-area {
+  width: 50%;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area .left-area .writer-text-title {
+  display: inline-block;
+  font-size: 15px;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area .left-area .writer-name {
+  display: inline-block;
+  font-size: 15px;
+  padding-left: 10px;
+  color: #9A671A;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area .right-area .limit-text-title {
+  display: inline-block;
+  font-size: 15px;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area .inner-flex-area .right-area .limit-name {
+  display: inline-block;
+  font-size: 15px;
+  padding-left: 10px;
+  color: #9A671A;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-footer .favorite-button {
+  min-width: unset;
+  background-color: unset;
+  border: unset;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-footer .active-favorite-heart svg {
+  fill: red;
+}
+.page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-footer .borrow-button {
+  text-align: center;
+  padding: 5px 16px;
+  border-radius: 100px;
+  background-color: #2FBE46;
+}
+.confirmation-modal .modal-dialog .modal-content {
+  position: relative;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body {
+  position: static;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex {
+  place-content: center;
+  text-align: center;
+  row-gap: 20px;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex svg {
+  position: absolute;
+  top: 10%;
+  transform: translateY(-50%) translateX(-50%);
+  left: 50%;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .reminder-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .reminder-text {
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .cancel-button {
+  text-align: center;
+  padding: 5px 16px;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  background-color: #EE0000;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .confirm-button {
+  text-align: center;
+  padding: 5px 16px;
+  color: #fff;
+  border: none;
   border-radius: 100px;
   background-color: #2FBE46;
 }
@@ -687,7 +866,7 @@ select {
 }
 .page-catalog .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex svg {
   position: absolute;
-  top: 0;
+  top: 10%;
   transform: translateY(-50%) translateX(-50%);
   left: 50%;
 }
@@ -851,6 +1030,32 @@ select {
 }
 .page-buku-saya .background-color .container .book-area .card .flex-container .right-item .returned-book .first-area .badge svg {
   stroke: #2FBE46;
+}
+.page-buku-saya .background-color .container .table.table-hover thead {
+  background-color: #FFC46E;
+}
+.page-buku-saya .background-color .container .table.table-hover tbody {
+  background-color: #FFFFFF;
+}
+.category-flex-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+.category-flex-area .category-flex-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  column-gap: 8px;
+  align-items: center;
+}
+.category-flex-area .category-flex-container .input-checkbox-square {
+  width: 16px;
+}
+.category-flex-area .category-flex-container .input-checkbox-label {
+  flex: 1;
 }
 .buku-favorit-page .background-color .container .book-area {
   display: flex;
@@ -1046,7 +1251,7 @@ select {
 }
 .buku-favorit-page .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex svg {
   position: absolute;
-  top: 0;
+  top: 10%;
   transform: translateY(-50%) translateX(-50%);
   left: 50%;
 }
@@ -1209,24 +1414,72 @@ select {
     justify-content: center;
     row-gap: 10px;
   }
-  .page-catalog .background-color .container .category-area {
+  .page-catalog .background-color .container .category-area,
+  .page-home .background-color .container .category-area {
     flex-direction: row;
     column-gap: 3%;
     margin-bottom: 20px;
   }
-  .page-catalog .background-color .container .category-area .card {
+  .page-catalog .background-color .container .category-area .card,
+  .page-home .background-color .container .category-area .card {
     width: 48%;
     place-content: center;
   }
-  .page-catalog .background-color .container .book-area .card {
+  .page-catalog .background-color .container .book-area .card,
+  .page-home .background-color .container .book-area .card {
     width: 100%;
   }
-  .page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex {
+  .page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex,
+  .page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex {
     flex-direction: column;
     row-gap: 12px;
     align-items: center;
   }
-  .page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area {
+  .page-catalog .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area,
+  .page-home .background-color .container .book-area .card .flex-container .right-item .modal-borrow-book .modal-dialog .modal-content .modal-body .modal-flex .right-area {
     width: 100%;
+  }
+  .page-home .background-color .container .book-area .card .flex-container {
+    align-items: center ;
+    flex-direction: column;
+  }
+  .page-home .background-color .container .book-area .card .flex-container .left-item {
+    width: 100%;
+    text-align: center;
+  }
+  .page-home .background-color .container .book-area .card .flex-container .left-item .book-image {
+    height: 160px;
+    width: auto;
+    margin-bottom: 16px;
+  }
+  .page-home .background-color .container .book-area .card .flex-container .right-item .flex-area {
+    row-gap: 10px;
+    justify-content: center;
+  }
+  .page-about-us .background-color .container .flex-container {
+    flex-direction: column;
+  }
+  .page-about-us .background-color .container .flex-container .left-item {
+    width: 100%;
+  }
+  .page-about-us .background-color .container .flex-container .left-item img {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    transform: unset;
+    margin-bottom: 16px;
+  }
+  .page-about-us .background-color .container .flex-container .right-item {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: unset;
+    width: 100%;
+  }
+  .page-about-us .background-color .container .flex-container .right-item .title-text {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 20px;
   }
 }
