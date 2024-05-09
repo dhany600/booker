@@ -557,6 +557,48 @@ select {
   border-radius: 100px;
   background-color: #2FBE46;
 }
+.confirmation-modal .modal-dialog .modal-content {
+  position: relative;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body {
+  position: static;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex {
+  place-content: center;
+  text-align: center;
+  row-gap: 20px;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex svg {
+  position: absolute;
+  top: 10%;
+  transform: translateY(-50%) translateX(-50%);
+  left: 50%;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .reminder-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .reminder-text {
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .cancel-button {
+  text-align: center;
+  padding: 5px 16px;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  background-color: #EE0000;
+}
+.confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex .confirm-button {
+  text-align: center;
+  padding: 5px 16px;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  background-color: #2FBE46;
+}
 .page-about-us .background-color {
   padding-top: 60px;
   background-color: #F4D9AF;
@@ -824,7 +866,7 @@ select {
 }
 .page-catalog .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex svg {
   position: absolute;
-  top: 0;
+  top: 10%;
   transform: translateY(-50%) translateX(-50%);
   left: 50%;
 }
@@ -1209,7 +1251,7 @@ select {
 }
 .buku-favorit-page .background-color .container .book-area .card .flex-container .right-item .confirmation-modal .modal-dialog .modal-content .modal-body .modal-flex svg {
   position: absolute;
-  top: 0;
+  top: 10%;
   transform: translateY(-50%) translateX(-50%);
   left: 50%;
 }

@@ -250,13 +250,22 @@
             </div>
         </div>
     </div>
+    <div id="auth-status" data-auth="{{ auth()->check() ? 'true' : 'false' }}"></div>
+
 @endsection
 @section('js')
     <script>
         $(document).ready(function() {
+            var isAuthenticated = $('#auth-status').data('auth') === 'true';
             $('#borrowBookButton').click(function() {
                 const bookId = window.bookId ?? false;
 
+                if (!isAuthenticated) {
+                    // If not authenticated, redirect to the login page
+                    window.location.href = "{{ route('login') }}";
+                    return;
+                }
+                
                 if (!bookId) {
                     return;
                 }
@@ -288,6 +297,12 @@
             $('.favorite-button').click(function () {
                 var bookId = $(this).val();
                 var url = "{{ route('favorite.toggle', ':bookId') }}".replace(':bookId', bookId);
+
+                if (!isAuthenticated) {
+                    // If not authenticated, redirect to the login page
+                    window.location.href = "{{ route('login') }}";
+                    return;
+                }
 
                 $.ajax({
                     url: url,

@@ -29,8 +29,15 @@ class HomeController extends Controller
         $categories = Category::all();
         $selectedCategoryId = $request->query('category');
 
-        // Get the current user
-        $user = Auth::user();
+        // Initialize an empty array for user favorites
+        $userFavorites = [];
+
+        // Get the current user if authenticated
+        if (auth()->check()) {
+            $user = auth()->user();
+            // Get the IDs of favorited books for the user
+            $userFavorites = $user->favorites()->pluck('book_id')->toArray();
+        }
 
         // If a category is selected, filter books by category; otherwise, get all books
         if ($selectedCategoryId) {
@@ -41,15 +48,13 @@ class HomeController extends Controller
             $books = Book::all();
         }
 
-        // Get the IDs of favorited books for the user
-        $userFavorites = $user->favorites()->pluck('book_id')->toArray();
-
         return view('home', [
             'books' => $books,
             'categories' => $categories,
             'userFavorites' => $userFavorites,
         ]);
     }
+
 
     public function about()
     {
