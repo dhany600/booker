@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 
@@ -60,32 +61,47 @@ class AdminBookController extends Controller
             'synopsis' => 'required|string',
             'pengarang' => 'required|string|max:255',
             'book_quantity' => 'required|string|min:1',
-            'category_id' => 'required',
+            'categories' => 'required|array', // Ensure categories are provided as an array
+            'categories.*' => 'exists:categories,id', // Ensure all category IDs exist in the categories table
             'gambar_buku' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max file size as needed
             'pdf_buku' => 'required|mimes:pdf|max:20480', // Adjust max file size as needed
         ]);
 
-        // If validation passes, this code will execute
         // Handle file uploads for 'gambar_buku' and 'pdf_buku'
         $gambarBukuPath = $request->file('gambar_buku')->store('gambar_buku');
-        // dd($gambarBukuPath);
         $pdfBukuPath = $request->file('pdf_buku')->store('pdf_buku');
 
-        // Create a new book entry with the validated data and uploaded file paths
-        $book = new Book([
-            'nama_buku' => $validatedData['nama_buku'],
-            'synopsis' => $validatedData['synopsis'],
-            'pengarang' => $validatedData['pengarang'],
-            'book_left' => $validatedData['book_quantity'],
-            'book_quantity' => $validatedData['book_quantity'],
-            'category_id' => $validatedData['category_id'],
-            'gambar_buku' => $gambarBukuPath,
-            'pdf_buku' => $pdfBukuPath,
-        ]);
-        $book->save();
+        // Start a transaction to ensure data consistency
+        DB::beginTransaction();
 
-        // Redirect the user with a success message
-        return redirect('admin-dashboard/book/')->with('success', 'New post has been added');
+        try {
+            // Create a new book entry with the validated data and uploaded file paths
+            $book = new Book([
+                'nama_buku' => $validatedData['nama_buku'],
+                'synopsis' => $validatedData['synopsis'],
+                'pengarang' => $validatedData['pengarang'],
+                'book_left' => $validatedData['book_quantity'],
+                'book_quantity' => $validatedData['book_quantity'],
+                'gambar_buku' => $gambarBukuPath,
+                'pdf_buku' => $pdfBukuPath,
+            ]);
+            $book->save();
+
+            // Attach categories to the book
+            $book->categories()->attach($validatedData['categories']);
+
+            // Commit the transaction
+            DB::commit();
+
+            // Redirect the user with a success message
+            return redirect('admin-dashboard/book/')->with('success', 'New book has been added');
+        } catch (\Exception $e) {
+            // Rollback the transaction if an error occurs
+            DB::rollback();
+
+            // Redirect the user with an error message
+            return redirect()->back()->with('error', 'Failed to add the book. Please try again later.');
+        }
     }
 
 

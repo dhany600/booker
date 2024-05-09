@@ -22,7 +22,7 @@ class CreateBooksTable extends Migration
             $table->string('pdf_buku')->nullable();
             $table->string('book_left')->nullable();
             $table->string('book_quantity')->nullable();
-            $table->foreignId('category_id')->references('id')->on('categories');
+            // $table->foreignId('category_id')->references('id')->on('categories');
             $table->integer('favorite_count')->default(0);
             $table->timestamps();
         });

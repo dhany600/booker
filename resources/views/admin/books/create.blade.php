@@ -108,12 +108,15 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="category_id" class="form-label">Kategori</label>
-                                        <select name="category_id" id="category_id" class="w-100 form-control">
+                                        <label for="category_id" class="form-label">Kategori</label><br>
+                                        <div class="category-flex-area">
                                             @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
+                                            <div class="category-flex-container">
+                                                <input class="input-checkbox-square" type="checkbox" id="category_{{ $category->id }}" name="categories[]" value="{{ $category->id }}">
+                                                <label class="input-checkbox-label" for="category_{{ $category->id }}">{{ $category->nama_kategori }}</label><br>
+                                            </div>
                                             @endforeach
-                                        </select>
+                                        </div>
                                     </div>
 
                                     <button type="submit" class="btn btn-primary">

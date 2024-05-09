@@ -27,10 +27,10 @@
                             </form>
 
                             @auth
-                            <a href="#"
+                            {{-- <a href="#"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
-                            </a>
+                            </a> --}}
                             @else
                             <a href="{{ route('login') }}">
                                 Login
