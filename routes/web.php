@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminBookController;
+use App\Http\Controllers\AdminFavoritController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuSayaController;
 use App\Http\Controllers\CatalogController;
@@ -36,6 +37,8 @@ Route::get('/example-book', function () {
 // Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 
 Route::resource('/admin-dashboard/book', AdminBookController::class, ['names' => 'admin.book']);
+
+Route::resource('/admin-dashboard/favorite', AdminFavoritController::class, ['names' => 'admin.favorite']);
 
 Auth::routes();
 
