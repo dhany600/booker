@@ -21,15 +21,13 @@ class ActivityLogService {
         return Activity::with(['causer', 'subject'])
             ->when(request('search'), function ($query) {
                 $query->where(function ($subQuery) {
-                    $subQuery->where('description', 'like', '%' . request('search') . '%')
-                        ->orWhereHas('causer', function ($subQuery) {
-                            $subQuery->where('nama_lengkap', 'like', '%' . request('search') . '%');
-                        });
+                    $subQuery->where('description', 'like', '%' . request('search') . '%');
                 });
             })
             ->when(request('order'), function ($query) {
                 $query->orderBy('id', request('order'));
             })
-            ->latest()->paginate(10);
+            ->where('causer_id', auth()->id())
+            ->paginate(10);
     }
 }
