@@ -163,10 +163,10 @@
                                                                         <h3 class="book-title">
                                                                             {{ $book->nama_buku }}
                                                                         </h3>
-                                                                        <p class="book-synopsis">
+                                                                        <p class="book-synopsis w-100">
                                                                             {{ $book->synopsis }}
                                                                         </p>
-                                                                        <div class="inner-flex-area">
+                                                                        <div class="inner-flex-area w-100">
                                                                             <div class="left-area">
                                                                                 <p class="writer-text-title">
                                                                                     Penulis : 
@@ -242,7 +242,7 @@
                         <button class="cancel-button" data-dismiss="modal">
                             Tidak
                         </button>
-                        <button class="confirm-button" id="borrowBookButton">
+                        <button class="confirm-button" id="borrowBookButton{{ $book->id }}" value="{{ $book->id }}">
                             Ya
                         </button>
                     </div>
@@ -257,7 +257,7 @@
     <script>
         $(document).ready(function() {
             var isAuthenticated = $('#auth-status').data('auth') === 'true';
-            $('#borrowBookButton').click(function() {
+            $('.confirm-button').click(function() {
                 const bookId = window.bookId ?? false;
 
                 if (!isAuthenticated) {
@@ -270,6 +270,10 @@
                     return;
                 }
 
+            });
+
+            $('.confirm-button').click(function () {
+                var bookId = $(this).val();
                 $.ajax({
                     url: '{{ route("borrow.book") }}',
                     method: 'POST',
@@ -283,12 +287,7 @@
                         window.location.reload();
                     },
                     error: function (xhr, status, error) {
-                        if (xhr.status === 401) {
-                            // Handle validation error
-                            alert('Harap login terlebih dahulu');
-                            window.location.href = '{{ route("login") }}';
-                            return;
-                        }
+                        console.error(xhr.responseText);
                         // Handle errors, e.g., show an error message
                     }
                 });
