@@ -231,7 +231,7 @@
                                                                 Apa Kamu Yakin Ingin Meminjam Buku Ini ?
                                                             </h3>
                                                             <p class="reminder-text">
-                                                                Durasi waktu peminjaman maksimal 7 hari, jika lebih secara otomatis buku pinjaman akan kembali ke katalog.
+                                                                Durasi waktu peminjaman maksimal 14 hari, jika lebih secara otomatis buku pinjaman akan kembali ke katalog.
                                                             </p>
                                                             <button class="cancel-button" data-dismiss="modal">
                                                                 Tidak

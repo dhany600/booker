@@ -80,7 +80,7 @@
 
 
             <!-- BEGIN BACK BUTTON -->
-            <a href="http://www.page-flip.info/newspaper_wp" id="fb5-button-back">&lt; Back </a>
+            <a href="{{ route('bukuSaya.index') }}" id="fb5-button-back">&lt; Back </a>
             <!-- END BACK BUTTON -->
 
             <!-- BEGIN CONTAINER BOOK -->

@@ -1468,7 +1468,7 @@ select {
     }
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 800px) {
     .login-page{
         .background-area{
             position: relative;
@@ -1540,7 +1540,9 @@ select {
         }
         .button-container{
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: end;
+            row-gap: 10px;
+            column-gap: 10px;
         }
     }
 
@@ -1559,6 +1561,16 @@ select {
     .page-catalog, .page-home{
         .background-color{
             .container{
+                .row{
+                    .col-md-2{
+                        max-width: unset;
+                        flex: 0 0 100%;
+                    }
+                    .col-md-10{
+                        max-width: unset;
+                        flex: 0 0 100%;
+                    }
+                }
                 .category-area{
                     flex-direction: row;
                     column-gap: 3%;
@@ -1616,6 +1628,18 @@ select {
         }
     }
 
+    .page-catalog{
+        .background-color{
+            .container{
+                .book-area{
+                    column-gap: 3%;
+                    .card{
+                        width: 48%;
+                    }
+                }
+            }
+        }
+    }
 
     .page-about-us{
         .background-color{
@@ -1651,5 +1675,19 @@ select {
         
 
     }
+
+    .page-buku-saya{
+        .background-color{
+            .container{
+                .book-area {
+                    .card{
+                        width: 100%;
+                    }
+                }
+            } 
+
+        }
+
+    } 
 
 }

@@ -13,6 +13,9 @@
                         </h1>
                     </div>
                     <div class="col-sm-6">
+                        <a href="{{ route('admin.book.edit', $books->id) }}" class="btn btn-primary">
+                            Edit
+                        </a>
                     </div>
                 </div>
                 @if (Session::has('success'))
@@ -83,9 +86,11 @@
                                     <h3 class="dashboard-title mb-0 h4 font-weight-bold">
                                         Category
                                     </h3>
+                                    @foreach($books->categories as $category)
                                     <p class="content-text mb-1">
-                                        {{ $books->category_id }}
+                                        {{ $category->nama_kategori }}
                                     </p>
+                                    @endforeach
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <h3 class="dashboard-title mb-0 h4 font-weight-bold">

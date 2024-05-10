@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 
@@ -19,20 +20,24 @@ class AdminBookController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $book = Book::query();
-            return DataTables::of($book)
-            ->addColumn('actions', function ($book) {
-                return '<a href="' . route('admin.book.show', $book->id) . '" class="btn btn-sm btn-info">Show Details</a>';
-            })
-            ->addColumn('favorites', function ($book) {
-                $formattedPrice = 0;
-                return $formattedPrice;
-            })
-            ->rawColumns(['actions']) // Declare the 'actions' column as raw HTML
-            ->make(true);
-        };
+            $books = Book::query();
+            return DataTables::of($books)
+                ->addColumn('actions', function ($book) {
+                    $actions = '<a href="' . route('admin.book.show', $book->id) . '" class="btn btn-sm btn-info">Show Details</a>';
+                    $actions .= ' <button class="btn btn-sm btn-danger delete-book" data-id="' . $book->id . '">Delete</button>';
+                    return $actions;
+                })
+                ->addColumn('favorites', function ($book) {
+                    $formattedPrice = 0; // Add your favorite logic here
+                    return $formattedPrice;
+                })
+                ->rawColumns(['actions']) // Declare the 'actions' column as raw HTML
+                ->make(true);
+        }
+
         return view('admin.books.index');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -113,7 +118,8 @@ class AdminBookController extends Controller
      */
     public function show($id)
     {
-        $books = Book::where('id', $id)->firstOrFail();
+        $books = Book::with('categories')->findOrFail($id);
+
         return view('admin.books.show', [
             'books' => $books,
         ]);
@@ -127,7 +133,13 @@ class AdminBookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $books = Book::with('categories')->findOrFail($id);
+        $categories = Category::get();
+
+        return view('admin.books.edit', [
+            'books' => $books,
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -139,8 +151,37 @@ class AdminBookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_buku' => 'required|string|max:255',
+            'synopsis' => 'required|string',
+            'pengarang' => 'required|string|max:255',
+            'gambar_buku' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max file size and allowed file types as needed
+            'categories' => 'array', // Assuming categories are submitted as an array
+        ]);
+
+        $book = Book::findOrFail($id);
+        $book->nama_buku = $request->nama_buku;
+        $book->synopsis = $request->synopsis;
+        $book->pengarang = $request->pengarang;
+
+        // Update image if provided
+        if ($request->hasFile('gambar_buku')) {
+            $gambarBukuPath = $request->file('gambar_buku')->store('gambar_buku');
+            // Delete previous image if exists
+            if ($book->gambar_buku) {
+                Storage::delete($book->gambar_buku);
+            }
+            $book->gambar_buku = $gambarBukuPath;
+        }
+
+        // Update categories
+        $book->categories()->sync($request->categories);
+
+        $book->save();
+
+        return redirect()->route('admin.book.show', $book->id)->with('success', 'Book updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -151,5 +192,18 @@ class AdminBookController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $book = Book::find($id);
+            if ($book) {
+                $book->delete();
+                return response()->json(['success' => true, 'message' => 'Book deleted successfully']);
+            }
+            return response()->json(['success' => false, 'message' => 'Book not found']);
+        }
+        return response()->json(['success' => false, 'message' => 'Invalid request']);
     }
 }

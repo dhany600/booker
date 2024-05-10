@@ -92,6 +92,34 @@
                     ],
                 });
             });
+
+            $(document).on('click', '.delete-book', function() {
+                var bookId = $(this).data('id');
+                if (confirm("Are you sure you want to delete this book?")) {
+                    $.ajax({
+                        url: '/admin/book/' + bookId,
+                        type: 'DELETE',
+                        dataType: 'json',
+                        data: {
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                // Reload the table or update UI as needed
+                                alert(response.message);
+                            } else {
+                                alert(response.message);
+                            }
+                            location.reload()
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                }
+            });
+
+            
         </script>
     @endsection
 @endsection

@@ -36,6 +36,7 @@ Route::get('/example-book', function () {
 // Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
 // Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 
+Route::delete('admin/book/{id}', [AdminBookController::class, 'delete'])->name('admin.book.delete');
 Route::resource('/admin-dashboard/book', AdminBookController::class, ['names' => 'admin.book'])->middleware('role:admin');
 
 Route::resource('/admin-dashboard/favorite', AdminFavoritController::class, ['names' => 'admin.favorite']);

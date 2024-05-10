@@ -1342,7 +1342,7 @@ select {
   border-radius: 100px;
   display: inline-block;
 }
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 800px) {
   .login-page .background-area {
     position: relative;
   }
@@ -1404,7 +1404,9 @@ select {
   }
   .header-area .button-container {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: end;
+    row-gap: 10px;
+    column-gap: 10px;
   }
   .footer-area .footer-left {
     width: 100%;
@@ -1413,6 +1415,16 @@ select {
   .footer-area .footer-left .flex-area {
     justify-content: center;
     row-gap: 10px;
+  }
+  .page-catalog .background-color .container .row .col-md-2,
+  .page-home .background-color .container .row .col-md-2 {
+    max-width: unset;
+    flex: 0 0 100%;
+  }
+  .page-catalog .background-color .container .row .col-md-10,
+  .page-home .background-color .container .row .col-md-10 {
+    max-width: unset;
+    flex: 0 0 100%;
   }
   .page-catalog .background-color .container .category-area,
   .page-home .background-color .container .category-area {
@@ -1456,6 +1468,12 @@ select {
     row-gap: 10px;
     justify-content: center;
   }
+  .page-catalog .background-color .container .book-area {
+    column-gap: 3%;
+  }
+  .page-catalog .background-color .container .book-area .card {
+    width: 48%;
+  }
   .page-about-us .background-color .container .flex-container {
     flex-direction: column;
   }
@@ -1481,5 +1499,8 @@ select {
     font-size: 40px;
     text-align: center;
     margin-bottom: 20px;
+  }
+  .page-buku-saya .background-color .container .book-area .card {
+    width: 100%;
   }
 }
